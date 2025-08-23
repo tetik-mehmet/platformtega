@@ -1,7 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Exercise2() {
+  const router = useRouter();
   const canvasRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(2);
@@ -402,6 +405,14 @@ export default function Exercise2() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 p-8">
+      {/* Geri Dön Butonu - Sol üst köşe */}
+      <button
+        onClick={() => router.push("/panel")}
+        className="fixed top-6 left-6 z-50 bg-black/50 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg text-white font-bold text-sm border border-white/20 hover:bg-black/70 transition-all duration-300 flex items-center gap-2"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        Geri Dön
+      </button>
       <div className="max-w-4xl mx-auto">
         {/* Egzersiz Talimatları - Info Hover */}
         <div className="flex justify-start mb-6 relative group">

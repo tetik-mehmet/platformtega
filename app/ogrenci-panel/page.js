@@ -294,7 +294,7 @@ export default function OgrenciPaneliPage() {
                 {assignments.map((assignment) => (
                   <Link
                     key={assignment.id}
-                    href={assignment.id === 1 ? "/odevler/odev1" : "#"}
+                    href={`/odevler/odev${assignment.id}`}
                     className="block bg-gradient-to-r from-orange-400 to-orange-600 text-white rounded-lg p-4 text-center font-semibold hover:from-orange-500 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                   >
                     {assignment.title}

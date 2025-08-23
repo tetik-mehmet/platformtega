@@ -11,6 +11,7 @@ import {
   FileText,
   Scissors,
   Image,
+  Search,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -84,6 +85,26 @@ export default function OdakSayfasi() {
       renk: "from-yellow-500 to-amber-500",
       hoverRenk: "from-yellow-600 to-amber-600",
       link: "/ikilemeler",
+    },
+    {
+      id: "bulkaybet",
+      baslik: "Bul ve Kaybet",
+      aciklama:
+        "Renk ve şekil algılama becerilerinizi geliştirerek görsel odaklanmanızı artırın",
+      icon: Search,
+      renk: "from-rose-500 to-pink-500",
+      hoverRenk: "from-rose-600 to-pink-600",
+      link: "/renk-kaybolma",
+    },
+    {
+      id: "hayvankartlari",
+      baslik: "Hayvan Kartları",
+      aciklama:
+        "Hayvanları tanıyarak görsel hafıza ve tanıma becerilerinizi geliştirin",
+      icon: Eye,
+      renk: "from-emerald-500 to-teal-500",
+      hoverRenk: "from-emerald-600 to-teal-600",
+      link: "/hayvan-kartlari",
     },
   ];
 

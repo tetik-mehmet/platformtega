@@ -3,23 +3,21 @@
 import { useState } from "react";
 import Exercise2 from "@/app/exercise2/page";
 import Exercises from "@/app/exercises/page";
-import HeceOzel from "@/app/heceozel/page";
-import BulmaPage from "@/app/bulma/page";
-import YazimPage from "@/app/yazim/page";
-import MemoryGame from "@/app/oyun/page";
-import ParagrafEgzersizi from "@/app/paragrafegzersiz/page";
-import TekerlemeOkuma from "@/app/tekerleme/page";
+import HayvanKartlari from "@/app/hayvan-kartlari/page";
+import RenkKaybolma from "@/app/renk-kaybolma/page";
+import Ikilemeler from "@/app/ikilemeler/page";
+import KaybolanMetin from "@/app/kaybolan-metin/page";
+import Cabucak from "@/app/cabucak/page";
 
-export default function Odev1() {
+export default function Odev5() {
   const steps = [
     { key: "exercise2", title: "Görsel Takip - 1" },
     { key: "exercises", title: "Hızlı Okuma" },
-    { key: "heceozel", title: "Hece Birleştirme" },
-    { key: "bulma", title: "Kelime Bulma" },
-    { key: "yazim", title: "Yazım" },
-    { key: "paragraf", title: "Paragraf Egzersizi" },
-    { key: "tekerleme", title: "Tekerlemeler" },
-    { key: "oyun", title: "Hafıza Oyunu" },
+    { key: "hayvankartlari", title: "Hayvan Kartları (5 Hayvan)" },
+    { key: "renkkaybolma", title: "Renk Kaybolma (2 Oyun)" },
+    { key: "ikilemeler", title: "İkilemeler (2 Etkinlik)" },
+    { key: "kaybolanmetin", title: "Kaybolan Metin (2 Metin)" },
+    { key: "cabucak", title: "Çabucak (2 Alıştırma)" },
   ];
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -32,17 +30,17 @@ export default function Odev1() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-            Ödev 1: Çoklu Alıştırmalar
+            Ödev 5: Sınırlı Alıştırmalar
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            Alıştırmaları sırayla tamamlayın. İlk adım Exercise2 etkinliğinin
-            aynısıdır.
+            İlk iki alıştırma Ödev 1 ile aynıdır. Sonraki 5 alıştırma sınırlı
+            sayıda etkinlik içerir.
           </p>
         </div>
 
         {/* Adım Göstergesi */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-6">
-          <ol className="grid grid-cols-1 sm:grid-cols-8 gap-3">
+          <ol className="grid grid-cols-1 sm:grid-cols-7 gap-3">
             {steps.map((step, idx) => (
               <li
                 key={step.key}
@@ -90,43 +88,36 @@ export default function Odev1() {
 
           {currentStep === 2 && (
             <div className="rounded-2xl overflow-hidden">
-              <HeceOzel visibleSetKeys={["exercise1", "exercise2"]} />
+              {/* Sadece ilk 5 hayvanı göster */}
+              <HayvanKartlari visibleHayvanlar={[1, 2, 3, 4, 5]} />
             </div>
           )}
 
           {currentStep === 3 && (
             <div className="rounded-2xl overflow-hidden">
-              <BulmaPage visibleIds={["mevsim", "kedi"]} defaultId="mevsim" />
+              {/* Sadece 2 oyun göster */}
+              <RenkKaybolma visibleOyunlar={[1, 2]} />
             </div>
           )}
 
           {currentStep === 4 && (
             <div className="rounded-2xl overflow-hidden">
-              <YazimPage visibleSets={[1, 2]} />
+              {/* Sadece 2 etkinlik göster */}
+              <Ikilemeler visibleEtkinlikler={[1, 2]} />
             </div>
           )}
 
           {currentStep === 5 && (
             <div className="rounded-2xl overflow-hidden">
-              <ParagrafEgzersizi visibleCount={2} embedded />
+              {/* Sadece 2 metin göster */}
+              <KaybolanMetin visibleMetinler={[1, 2]} />
             </div>
           )}
 
           {currentStep === 6 && (
             <div className="rounded-2xl overflow-hidden">
-              <TekerlemeOkuma
-                items={[
-                  'Bir berber bir berbere, "Gel beraber bir berber dükkanı açalım" demiş.',
-                  "Dal sarkar kartal kalkar, kartal kalkar dal sarkar.",
-                  "Şu köşe yaz köşesi, şu köşe kış köşesi, ortada su şişesi.",
-                ]}
-              />
-            </div>
-          )}
-
-          {currentStep === 7 && (
-            <div className="rounded-2xl overflow-hidden">
-              <MemoryGame embedded />
+              {/* Sadece 2 alıştırma göster */}
+              <Cabucak visibleAlistirmalar={[1, 2]} />
             </div>
           )}
         </div>

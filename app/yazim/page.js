@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function YazimPage({ visibleSets = null }) {
+  const router = useRouter();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(20);
   const [isActive, setIsActive] = useState(false);
@@ -461,6 +462,10 @@ export default function YazimPage({ visibleSets = null }) {
     setTimeLeft(20);
   };
 
+  const goBackToOzel = () => {
+    router.push("/ozel");
+  };
+
   if (showResults) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -584,6 +589,29 @@ export default function YazimPage({ visibleSets = null }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl w-full text-center">
+          {/* Geri Dön Butonu */}
+          <div className="text-left mb-6">
+            <button
+              onClick={goBackToOzel}
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-lg flex items-center gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Geri Dön
+            </button>
+          </div>
+
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
             Yazım Etkinliği
           </h1>
@@ -698,7 +726,30 @@ export default function YazimPage({ visibleSets = null }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      {/* Geri Dön Butonu - Sol Üst */}
+      <div className="absolute top-4 left-4 z-10">
+        <button
+          onClick={goToMainMenu}
+          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-lg flex items-center gap-2"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Ana Menüye Dön
+        </button>
+      </div>
+
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">

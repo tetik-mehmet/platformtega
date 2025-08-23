@@ -1,7 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, Eye, Target, ArrowRight, LogOut, Brain } from "lucide-react";
+import {
+  BookOpen,
+  Eye,
+  Target,
+  ArrowRight,
+  ArrowLeft,
+  Brain,
+} from "lucide-react";
 
 export default function Panel() {
   const router = useRouter();
@@ -27,13 +34,9 @@ export default function Panel() {
     setIsLoading(false);
   }, [router]);
 
-  // Çıkış yap fonksiyonu
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("authToken"); // userToken yerine authToken
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userSurname");
-    router.push("/login");
+  // Geri dön fonksiyonu
+  const handleGoBack = () => {
+    router.push("/genel");
   };
 
   const alistirmalar = [
@@ -114,7 +117,7 @@ export default function Panel() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header - Başlık ve Çıkış Butonu */}
+        {/* Header - Başlık ve Geri Butonu */}
         <div className="flex justify-between items-center mb-8">
           <div className="text-center flex-1">
             <h1 className="text-4xl font-bold text-gray-800 mb-2">
@@ -132,13 +135,13 @@ export default function Panel() {
             </p>
           </div>
 
-          {/* Çıkış Yap Butonu */}
+          {/* Geri Dön Butonu */}
           <button
-            onClick={handleLogout}
-            className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-md hover:shadow-lg"
+            onClick={handleGoBack}
+            className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-md hover:shadow-lg"
           >
-            <LogOut className="w-5 h-5" />
-            <span>Çıkış Yap</span>
+            <ArrowLeft className="w-5 h-5" />
+            <span>Geri Dön</span>
           </button>
         </div>
 

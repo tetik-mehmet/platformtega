@@ -240,15 +240,27 @@ const TEST_ISIMLERI_6 = [
   "NETFLIX",
 ];
 
-export default function Exercise4() {
+export default function Exercise4({ initialSet = 1 }) {
   const [currentPhase, setCurrentPhase] = useState("logoSelection"); // logoSelection, instructions, viewing, testing, results
-  const [selectedLogoSet, setSelectedLogoSet] = useState(1); // 1, 2, 3, 4, 5 veya 6
+  const [selectedLogoSet, setSelectedLogoSet] = useState(initialSet); // 1, 2, 3, 4, 5 veya 6
   const [timeLeft, setTimeLeft] = useState(10);
   const [selectedLogos, setSelectedLogos] = useState([]);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const timerRef = useRef(null);
+
+  // initialSet prop'u değiştiğinde selectedLogoSet'i güncelle
+  useEffect(() => {
+    setSelectedLogoSet(initialSet);
+  }, [initialSet]);
+
+  // initialSet prop'u verildiğinde doğrudan instructions aşamasına geç
+  useEffect(() => {
+    if (initialSet && initialSet !== 1) {
+      setCurrentPhase("instructions");
+    }
+  }, [initialSet]);
 
   // Timer fonksiyonu
   useEffect(() => {
@@ -336,18 +348,20 @@ export default function Exercise4() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Başlık */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center justify-center gap-3">
-            <Brain className="w-8 h-8 text-indigo-600" />
-            Logo Hafıza Egzersizi
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Altı farklı logo seti arasından seçim yapın ve hafızanızı test edin.
-          </p>
-        </div>
+    <div className={`${initialSet ? 'min-h-0' : 'min-h-screen'} bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50`}>
+      <div className={`container mx-auto px-4 ${initialSet ? 'py-4' : 'py-8'}`}>
+        {/* Başlık - Sadece standalone modda göster */}
+        {!initialSet && (
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center justify-center gap-3">
+              <Brain className="w-8 h-8 text-indigo-600" />
+              Logo Hafıza Egzersizi
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Altı farklı logo seti arasından seçim yapın ve hafızanızı test edin.
+            </p>
+          </div>
+        )}
 
         {/* Ana içerik */}
         <div className="max-w-6xl mx-auto">

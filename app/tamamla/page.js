@@ -15,6 +15,12 @@ export default function TamamlaPage() {
   const [showFeedback, setShowFeedback] = useState({});
   const [showExtraText, setShowExtraText] = useState(false);
 
+  // İkinci metin için state'ler
+  const [extraTextUserInputs, setExtraTextUserInputs] = useState({});
+  const [extraTextFeedback, setExtraTextFeedback] = useState({});
+  const [extraTextShowFeedback, setExtraTextShowFeedback] = useState({});
+  const [extraTextScore, setExtraTextScore] = useState(0);
+
   // Görüntüdeki yeni metin paragrafı - eksik harfler _ ile işaretlenmiş
   const originalText = `H_zlı oku_a, bireylerin metinleri daha kısa s_rede ve an_ayarak okuyabilmesini sağlayan bir okuma te_niğidir. Temel amacı, okuma hı_ını artırı_ken anlama oranını da koruma. ya da geliştirmektir. G_nümüzde bil_iye ulaşımın ol_ukça kolaylaştığı ancak zamanın daha kı_metli hale geldiği bir ça_da yaşıyoruz. Bu nedenle _ızlı ve e_kili okumak, hem öğrenciler hem _e profesyoneller i_in büyük bir avantaj sa_lar. Hızlı okuma tekni_leri, _elimeleri tek tek okumak yerine gru_lar halinde gö_meyi ve anla_ayı öğretir. Beyin, belirli bir hızdan sonra da_a _erimli çalıştığı için, bu _öntemle okunan metin daha kolay anla_ılır hale ge_ir. Ayrıca göz kap_klarının e_itilmesi ve geri dönüş hareke_lerinin a_altılması da okuma süre_ini önemli öl_üde kısaltır. Bu beceri, yalnız_a hız değil, aynı _amanda dikka_ve odaklanma gibi bili_sel yetenekleri de gel_ştirir. Hızlı okuma e_itimi alan kişiler, _etinler üzerinde daha fazla hâkimiye_kurar ve önemli bilgileri kolayca ayıklayabilir. Özellikle sına_lara hazırlanan öğrenciler için_aman yö_etimi açısından bü_ük bir katkı sağlar.`;
 
@@ -301,6 +307,10 @@ export default function TamamlaPage() {
     return result;
   };
 
+  const goBackToOzel = () => {
+    router.push("/ozel");
+  };
+
   if (showResult) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -339,6 +349,29 @@ export default function TamamlaPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+          {/* Geri Dön Butonu */}
+          <div className="text-left mb-6">
+            <button
+              onClick={goBackToOzel}
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-lg flex items-center gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Geri Dön
+            </button>
+          </div>
+
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
             Eksik Harfleri Tamamla
           </h1>
@@ -387,7 +420,30 @@ export default function TamamlaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      {/* Geri Dön Butonu - Sol Üst */}
+      <div className="absolute top-4 left-4 z-10">
+        <button
+          onClick={goBackToOzel}
+          className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-lg flex items-center gap-2"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Geri Dön
+        </button>
+      </div>
+
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">

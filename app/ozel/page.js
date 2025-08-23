@@ -11,7 +11,9 @@ import {
   PenTool,
   ArrowRight,
   Sparkles,
+  ArrowLeft,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const alistirmalar = [
   {
@@ -82,8 +84,17 @@ const alistirmalar = [
 ];
 
 export default function OzelSayfa() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Geri Dön Butonu - Sol üst köşe */}
+      <button
+        onClick={() => router.push("/panel")}
+        className="fixed top-6 left-6 z-50 bg-black/50 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg text-white font-bold text-sm border border-white/20 hover:bg-black/70 transition-all duration-300 flex items-center gap-2"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        Geri Dön
+      </button>
       {/* Header Bölümü */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-orange-600/20"></div>

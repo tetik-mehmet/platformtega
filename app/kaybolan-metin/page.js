@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function KaybolanMetin() {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(200); // milisaniye
@@ -87,6 +90,14 @@ export default function KaybolanMetin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      {/* Geri Dön Butonu - Sol üst köşe */}
+      <button
+        onClick={() => router.push('/panel')}
+        className="fixed top-6 left-6 z-50 bg-black/50 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg text-white font-bold text-sm border border-white/20 hover:bg-black/70 transition-all duration-300 flex items-center gap-2"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        Geri Dön
+      </button>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-indigo-800 mb-8">
           Kaybolan Metin Egzersizi
