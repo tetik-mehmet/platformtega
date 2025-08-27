@@ -154,6 +154,56 @@ export default function CabucakCumleEgzersizi() {
   const cumleIntervalRef = useRef(null);
   const hideTimeoutRef = useRef(null);
 
+  // Ses referansları
+  const startAudioRef = useRef(null);
+  const pauseAudioRef = useRef(null);
+  const unpauseAudioRef = useRef(null);
+  const cancelAudioRef = useRef(null);
+
+  // Ses dosyalarını hazırla
+  useEffect(() => {
+    startAudioRef.current = new Audio("/butonsesi.mp3");
+    startAudioRef.current.volume = 0.5;
+    startAudioRef.current.preload = "auto";
+
+    pauseAudioRef.current = new Audio("/sesler/pause.mp3");
+    pauseAudioRef.current.volume = 0.6;
+    pauseAudioRef.current.preload = "auto";
+
+    unpauseAudioRef.current = new Audio("/sesler/unpause.mp3");
+    unpauseAudioRef.current.volume = 0.6;
+    unpauseAudioRef.current.preload = "auto";
+
+    cancelAudioRef.current = new Audio("/sesler/cancel.mp3");
+    cancelAudioRef.current.volume = 0.6;
+    cancelAudioRef.current.preload = "auto";
+  }, []);
+
+  // Genel amaçlı ses çalma yardımcı fonksiyonu
+  const playAudio = (ref) => {
+    try {
+      if (ref.current) {
+        if (ref.current.readyState >= 2) {
+          ref.current.currentTime = 0;
+          ref.current.play().catch((e) => console.log("Ses çalınamadı:", e));
+        } else {
+          ref.current.load();
+          ref.current.addEventListener(
+            "canplaythrough",
+            () => {
+              ref.current
+                .play()
+                .catch((e) => console.log("Ses çalınamadı:", e));
+            },
+            { once: true }
+          );
+        }
+      }
+    } catch (e) {
+      console.log("Ses yüklenemedi:", e);
+    }
+  };
+
   // Ana timer ve cümle gösterme useEffect'i
   useEffect(() => {
     if (!basladi || bitis) return;
@@ -261,6 +311,7 @@ export default function CabucakCumleEgzersizi() {
   }, [hizMs]);
 
   const egzersiziBaslat = () => {
+    playAudio(startAudioRef);
     setBasladi(true);
     setDuraklatildi(false);
     setBitis(false);
@@ -283,6 +334,7 @@ export default function CabucakCumleEgzersizi() {
   };
 
   const secimlereDon = () => {
+    playAudio(cancelAudioRef);
     setBasladi(false);
     setDuraklatildi(false);
     setBitis(false);
@@ -298,6 +350,11 @@ export default function CabucakCumleEgzersizi() {
 
   const duraklatDevamEt = () => {
     const yeniDuraklatildi = !duraklatildi;
+    if (yeniDuraklatildi) {
+      playAudio(pauseAudioRef);
+    } else {
+      playAudio(unpauseAudioRef);
+    }
     setDuraklatildi(yeniDuraklatildi);
 
     if (yeniDuraklatildi) {
@@ -342,12 +399,12 @@ export default function CabucakCumleEgzersizi() {
   };
 
   const router = useRouter();
-  
+
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50">
       {/* Geri Dön Butonu - Sol üst köşe */}
       <button
-        onClick={() => router.push('/panel')}
+        onClick={() => router.push("/panel")}
         className="fixed top-6 left-6 z-50 bg-black/50 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg text-white font-bold text-sm border border-white/20 hover:bg-black/70 transition-all duration-300 flex items-center gap-2"
       >
         <ArrowLeft className="w-5 h-5" />

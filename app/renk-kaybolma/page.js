@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const COLOR_OPTIONS = [
+  "bg-white", // beyaz
+  "bg-green-500", // yeşil
+  "bg-yellow-500", // sarı
+  "bg-red-500", // kırmızı
+  "bg-black", // siyah
+  "bg-[#9966CC]", // özel mor tonu
+];
 import { useRouter } from "next/navigation";
 
 const RenkKaybolma = () => {
@@ -9,21 +18,14 @@ const RenkKaybolma = () => {
   const [colors, setColors] = useState([]);
   const [colorCounts, setColorCounts] = useState({});
   const [mostFrequentColors, setMostFrequentColors] = useState([]); // Array olarak değiştirildi
+  const correctAudioRef = useRef(null);
+  const wrongAudioRef = useRef(null);
 
   const [level, setLevel] = useState(1);
   const [remainingBalls, setRemainingBalls] = useState(49);
 
-  const colorOptions = [
-    "bg-white", // beyaz
-    "bg-green-500", // yeşil
-    "bg-yellow-500", // sarı
-    "bg-red-500", // kırmızı
-    "bg-black", // siyah
-    "bg-[#9966CC]", // özel mor tonu
-  ];
-
   // Yeni oyun başlat
-  const startNewGame = () => {
+  const startNewGame = useCallback(() => {
     let newColors = [];
     let newColorCounts = {};
     let hasEqualCounts = true;
@@ -36,7 +38,7 @@ const RenkKaybolma = () => {
       // 49 top için rastgele renkler ata
       for (let i = 0; i < 49; i++) {
         const randomColor =
-          colorOptions[Math.floor(Math.random() * colorOptions.length)];
+          COLOR_OPTIONS[Math.floor(Math.random() * COLOR_OPTIONS.length)];
         newColors.push(randomColor);
 
         if (newColorCounts[randomColor]) {
@@ -69,7 +71,7 @@ const RenkKaybolma = () => {
     setMostFrequentColors(maxColors);
     setGameState("playing");
     setRemainingBalls(49);
-  };
+  }, []);
 
   // Renk seçimi yap
   const handleColorClick = (selectedColor) => {
@@ -79,6 +81,12 @@ const RenkKaybolma = () => {
 
     // Seçilen renk en çok olan renklerden biri mi kontrol et
     if (mostFrequentColors.includes(selectedColor)) {
+      try {
+        if (correctAudioRef.current) {
+          correctAudioRef.current.currentTime = 0;
+          void correctAudioRef.current.play();
+        }
+      } catch {}
       // Doğru tahmin - o renkteki topları kaldır (indexleri sabit tut)
       const newColors = colors.map((color) =>
         color === selectedColor ? null : color
@@ -131,6 +139,12 @@ const RenkKaybolma = () => {
       }, 1000);
     } else {
       // Yanlış tahmin
+      try {
+        if (wrongAudioRef.current) {
+          wrongAudioRef.current.currentTime = 0;
+          void wrongAudioRef.current.play();
+        }
+      } catch {}
       setGameState("wrong");
       setTimeout(() => {
         startNewGame();
@@ -140,8 +154,20 @@ const RenkKaybolma = () => {
 
   // Oyun başlangıcında
   useEffect(() => {
+    try {
+      const correctAudio = new Audio("/true.mp3");
+      correctAudio.preload = "auto";
+      correctAudioRef.current = correctAudio;
+
+      const wrongAudio = new Audio("/wrong.mp3");
+      wrongAudio.preload = "auto";
+      wrongAudioRef.current = wrongAudio;
+    } catch (e) {
+      // sessizce geç
+    }
+
     startNewGame();
-  }, []);
+  }, [startNewGame]);
 
   // En çok olan renkleri göster
   const getMostFrequentText = () => {

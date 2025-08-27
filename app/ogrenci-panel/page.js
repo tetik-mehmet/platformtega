@@ -509,6 +509,23 @@ export default function OgrenciPaneliPage() {
                 </div>
               ))}
             </div>
+
+            {/* Kitap Önerileri Linki */}
+            <div className="mt-4">
+              <Link
+                href="/kitap-onerileri"
+                className="block w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg p-4 text-center font-semibold hover:from-emerald-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-xl">📖</span>
+                  <span>Kitap Önerileri</span>
+                  <span className="text-xl">✨</span>
+                </div>
+                <p className="text-sm text-emerald-100 mt-1">
+                  Yaş grubunuza uygun kitapları keşfedin
+                </p>
+              </Link>
+            </div>
           </div>
 
           {/* Bilgi Notu */}

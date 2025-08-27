@@ -36,7 +36,6 @@ export async function POST(request) {
     }
 
     console.log("✅ Kullanıcı bulundu:", user.email);
-    console.log("🔍 User subscription:", user.subscription);
 
     // Şifreyi kontrol et
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -51,14 +50,7 @@ export async function POST(request) {
       );
     }
 
-    // Abonelik kontrolünü tamamen kaldır
     console.log("✅ Şifre doğru, giriş yapılıyor");
-
-    // Son giriş zamanını güncelle (eğer alan varsa)
-    if (user.lastLogin !== undefined) {
-      user.lastLogin = new Date();
-      await user.save();
-    }
 
     // JWT token oluştur
     const token = jwt.sign(
@@ -79,19 +71,6 @@ export async function POST(request) {
         name: user.name,
         surname: user.surname,
         email: user.email,
-      },
-      // Abonelik bilgilerini ekle (sadece bilgi amaçlı)
-      subscription: user.subscription || {
-        isActive: false,
-        packageId: null,
-        startDate: null,
-        endDate: null,
-      },
-      // Paket bilgilerini ekle
-      packages: user.packages || {
-        hizliOkuma: false,
-        temelIngilizce: false,
-        odakProgrami: false,
       },
     });
   } catch (error) {

@@ -478,6 +478,15 @@ export default function HafizaEt() {
     return () => clearInterval(interval);
   }, [isActive, showWords, wordDisplayTime]);
 
+  const playRestartSound = () => {
+    try {
+      const audio = new Audio("/magic.wav");
+      audio.play();
+    } catch (e) {
+      // sessizce geç
+    }
+  };
+
   const startExercise = () => {
     const selectedWords = selectRandomColorWordSet();
     assignRandomColors(selectedWords);
@@ -515,6 +524,7 @@ export default function HafizaEt() {
   };
 
   const resetExercise = () => {
+    playRestartSound();
     const selectedWords = selectRandomColorWordSet();
     assignRandomColors(selectedWords);
 

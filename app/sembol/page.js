@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const symbols = [
@@ -104,6 +104,7 @@ export default function SembolSayma({
   autoStart = false,
 } = {}) {
   const router = useRouter();
+  const timeUpAudioRef = useRef(null);
   const [grid, setGrid] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [selectedDifficulty, setSelectedDifficulty] =
@@ -163,6 +164,15 @@ export default function SembolSayma({
           if (prev <= 1) {
             setIsGameActive(false);
             setShowResults(true);
+            // Süre dolduğunda uyarı sesi çal
+            if (timeUpAudioRef.current) {
+              try {
+                timeUpAudioRef.current.currentTime = 0;
+                timeUpAudioRef.current.play();
+              } catch (e) {
+                // Sessizce geç
+              }
+            }
             return 0;
           }
           return prev - 1;
@@ -223,6 +233,12 @@ export default function SembolSayma({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button

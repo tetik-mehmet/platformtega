@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const MemoryGame = ({ embedded = false } = {}) => {
   const [cards, setCards] = useState([]);
@@ -12,6 +12,9 @@ const MemoryGame = ({ embedded = false } = {}) => {
   const [timer, setTimer] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showAllCards, setShowAllCards] = useState(false);
+  const successAudioRef = useRef(null);
+  const wrongAudioRef = useRef(null);
+  const magicAudioRef = useRef(null);
 
   // MDF temalı kartlar
   const cardData = [
@@ -65,6 +68,44 @@ const MemoryGame = ({ embedded = false } = {}) => {
     }, 1700);
   };
 
+  // Sesleri hazırla
+  useEffect(() => {
+    successAudioRef.current =
+      typeof Audio !== "undefined" ? new Audio("/true.mp3") : null;
+    wrongAudioRef.current =
+      typeof Audio !== "undefined" ? new Audio("/wrong.mp3") : null;
+    // magic mp3 yoksa wav'a düş
+    if (typeof Audio !== "undefined") {
+      const tryMp3 = new Audio("/magic.mp3");
+      const setWavFallback = () => {
+        magicAudioRef.current = new Audio("/magic.wav");
+        magicAudioRef.current.volume = 0.6;
+      };
+      tryMp3.addEventListener(
+        "canplaythrough",
+        () => {
+          magicAudioRef.current = tryMp3;
+          magicAudioRef.current.volume = 0.6;
+        },
+        { once: true }
+      );
+      tryMp3.addEventListener("error", setWavFallback, { once: true });
+      tryMp3.load();
+    }
+    if (successAudioRef.current) successAudioRef.current.volume = 0.6;
+    if (wrongAudioRef.current) wrongAudioRef.current.volume = 0.6;
+  }, []);
+
+  const handleRestartWithSound = () => {
+    try {
+      if (magicAudioRef.current) {
+        magicAudioRef.current.currentTime = 0;
+        magicAudioRef.current.play().catch(() => {});
+      }
+    } catch (e) {}
+    startGame();
+  };
+
   // Kart çevir
   const flipCard = (cardId) => {
     if (!isPlaying || showAllCards) return;
@@ -95,12 +136,28 @@ const MemoryGame = ({ embedded = false } = {}) => {
           setScore((prev) => prev + 10);
           setFlippedCards([]);
 
+          // Doğru eşleşme sesi
+          try {
+            if (successAudioRef.current) {
+              successAudioRef.current.currentTime = 0;
+              successAudioRef.current.play().catch(() => {});
+            }
+          } catch (e) {}
+
           if (matchedPairs.length + 1 === cardData.length / 2) {
             setGameCompleted(true);
             setIsPlaying(false);
           }
         }, 500);
       } else {
+        // Yanlış eşleşme sesi
+        try {
+          if (wrongAudioRef.current) {
+            wrongAudioRef.current.currentTime = 0;
+            wrongAudioRef.current.play().catch(() => {});
+          }
+        } catch (e) {}
+
         setTimeout(() => {
           const updatedCards = newCards.map((c) =>
             newFlippedCards.some((fc) => fc.id === c.id)
@@ -221,7 +278,7 @@ const MemoryGame = ({ embedded = false } = {}) => {
               </p>
             </div>
             <button
-              onClick={startGame}
+              onClick={handleRestartWithSound}
               className="mt-4 bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-2 rounded-full font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg"
             >
               🔄 Yeniden Başla
@@ -275,7 +332,7 @@ const MemoryGame = ({ embedded = false } = {}) => {
         {!gameCompleted && !showAllCards && (
           <div className="text-center pt-4 flex-shrink-0">
             <button
-              onClick={startGame}
+              onClick={handleRestartWithSound}
               className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-3 rounded-full font-bold text-base hover:scale-105 transition-transform duration-200 shadow-lg"
             >
               🔄 Yeni Oyun

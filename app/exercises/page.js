@@ -400,6 +400,100 @@ export default function HızlıOkumaEgzersizi() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [particleCount, setParticleCount] = useState(0);
 
+  // Ses dosyasını önceden yükle ve hazırla
+  const audioRef = useRef(null);
+  const pauseAudioRef = useRef(null);
+  const unpauseAudioRef = useRef(null);
+  const cancelAudioRef = useRef(null);
+
+  // Component yüklendiğinde ses dosyasını hazırla
+  useEffect(() => {
+    audioRef.current = new Audio("/butonsesi.mp3");
+    audioRef.current.volume = 0.5;
+    audioRef.current.preload = "auto"; // Ses dosyasını önceden yükle
+
+    // Duraklat/Devam Et sesleri
+    pauseAudioRef.current = new Audio("/sesler/pause.mp3");
+    pauseAudioRef.current.volume = 0.6;
+    pauseAudioRef.current.preload = "auto";
+
+    unpauseAudioRef.current = new Audio("/sesler/unpause.mp3");
+    unpauseAudioRef.current.volume = 0.6;
+    unpauseAudioRef.current.preload = "auto";
+
+    // İptal sesi
+    cancelAudioRef.current = new Audio("/sesler/cancel.mp3");
+    cancelAudioRef.current.volume = 0.6;
+    cancelAudioRef.current.preload = "auto";
+
+    // Ses dosyası yüklendiğinde hazır olduğunu işaretle
+    audioRef.current.addEventListener("canplaythrough", () => {
+      console.log("Ses dosyası hazır");
+    });
+
+    // Hata durumunda log
+    audioRef.current.addEventListener("error", (error) => {
+      console.log("Ses dosyası yüklenemedi:", error);
+    });
+  }, []);
+
+  // Ses çalma fonksiyonu - optimize edilmiş
+  const sesCal = () => {
+    try {
+      if (audioRef.current) {
+        // Ses dosyası hazırsa hemen çal
+        if (audioRef.current.readyState >= 2) {
+          // HAVE_CURRENT_DATA
+          audioRef.current.currentTime = 0; // Baştan başlat
+          audioRef.current.play().catch((error) => {
+            console.log("Ses çalınamadı:", error);
+          });
+        } else {
+          // Ses dosyası henüz hazır değilse yükle ve çal
+          audioRef.current.load();
+          audioRef.current.addEventListener(
+            "canplaythrough",
+            () => {
+              audioRef.current.play().catch((error) => {
+                console.log("Ses çalınamadı:", error);
+              });
+            },
+            { once: true }
+          ); // Event listener'ı bir kez çalıştır
+        }
+      }
+    } catch (error) {
+      console.log("Ses yüklenemedi:", error);
+    }
+  };
+
+  // Genel amaçlı ses çalma (ref ile)
+  const sesCalGenel = (ref) => {
+    try {
+      if (ref.current) {
+        if (ref.current.readyState >= 2) {
+          ref.current.currentTime = 0;
+          ref.current.play().catch((error) => {
+            console.log("Ses çalınamadı:", error);
+          });
+        } else {
+          ref.current.load();
+          ref.current.addEventListener(
+            "canplaythrough",
+            () => {
+              ref.current.play().catch((error) => {
+                console.log("Ses çalınamadı:", error);
+              });
+            },
+            { once: true }
+          );
+        }
+      }
+    } catch (error) {
+      console.log("Ses yüklenemedi:", error);
+    }
+  };
+
   useEffect(() => {
     if (bitis) {
       setShowConfetti(true);
@@ -483,6 +577,7 @@ export default function HızlıOkumaEgzersizi() {
   ]);
 
   const egzersiziBaslat = () => {
+    sesCal(); // Ses çal
     setBasladi(true);
     setBitis(false);
     setDuraklatildi(false);
@@ -505,6 +600,8 @@ export default function HızlıOkumaEgzersizi() {
   };
 
   const secimlereDon = () => {
+    // İptal sesini çal
+    sesCalGenel(cancelAudioRef);
     setBasladi(false);
     setBitis(false);
     setDuraklatildi(false);
@@ -516,7 +613,15 @@ export default function HızlıOkumaEgzersizi() {
   };
 
   const duraklatDevamEt = () => {
-    setDuraklatildi(!duraklatildi);
+    const sonrakiDurum = !duraklatildi;
+    if (sonrakiDurum) {
+      // Duraklatıldı
+      sesCalGenel(pauseAudioRef);
+    } else {
+      // Devam edildi
+      sesCalGenel(unpauseAudioRef);
+    }
+    setDuraklatildi(sonrakiDurum);
   };
 
   return (

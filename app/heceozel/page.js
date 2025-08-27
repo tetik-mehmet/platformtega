@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 export default function HeceOzel({ visibleSetKeys = null }) {
@@ -11,6 +11,7 @@ export default function HeceOzel({ visibleSetKeys = null }) {
   const [isExerciseStarted, setIsExerciseStarted] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const timeUpAudioRef = useRef(null);
 
   // Zorluk seviyelerine göre süreler (tüm etkinliklerde aynı)
   const difficultyTimes = {
@@ -167,6 +168,105 @@ export default function HeceOzel({ visibleSetKeys = null }) {
         { id: 15, syllables: ["YA", "VUS", "A", "TUR"], answer: "AVUSRURYA" },
       ],
     },
+    exercise8: {
+      title: "Etkinlik 8",
+      description: "Hızlı Okuma - Hece Birleştirme",
+      exercises: [
+        { id: 1, syllables: ["A", "TAR", "NAH"], answer: "ANAHTAR" },
+        { id: 2, syllables: ["NIT", "A", "KA", "BİR"], answer: "ANITKABİR" },
+        { id: 3, syllables: ["MAN", "TREN", "AN"], answer: "ANTRENMAN" },
+        { id: 4, syllables: ["YE", "BE", "Dİ", "LE"], answer: "BELEDİYE" },
+        { id: 5, syllables: ["LA", "BAK", "GİL"], answer: "BAKLAGİL" },
+        { id: 6, syllables: ["BUZ", "BI", "LA", "DO"], answer: "BUZDOLABI" },
+        { id: 7, syllables: ["YO", "LO", "Jİ", "Bİ"], answer: "BİYOLOJİ" },
+        { id: 8, syllables: ["RET", "CE", "SA"], answer: "CESARET" },
+        { id: 9, syllables: ["ZA", "CE", "EVİ"], answer: "CEZAEVİ" },
+        { id: 10, syllables: ["ÇE", "LİŞ", "Lİ", "Kİ"], answer: "ÇELİŞKİLİ" },
+        { id: 11, syllables: ["LEN", "MEK", "DİN"], answer: "DİNLENMEK" },
+        { id: 12, syllables: ["Sİ", "LO", "DİP", "MA"], answer: "DİPLOMASİ" },
+        { id: 13, syllables: ["NA", "DO", "NIM"], answer: "DONANIM" },
+      ],
+    },
+    exercise9: {
+      title: "Etkinlik 9",
+      description: "Hızlı Okuma - Hece Birleştirme",
+      exercises: [
+        { id: 1, syllables: ["E", "VEYN", "BE"], answer: "EBEVEYN" },
+        { id: 2, syllables: ["LİK", "GE", "E", "MEN"], answer: "EGEMENLİK" },
+        { id: 3, syllables: ["Tİ", "EM", "PA"], answer: "EMPATİ" },
+        { id: 4, syllables: ["NER", "Jİ", "E"], answer: "ENERJİ" },
+        { id: 5, syllables: ["YON", "Sİ", "FEK", "EN"], answer: "ENFEKSİYON" },
+        { id: 6, syllables: ["ER", "RUM", "ZU"], answer: "ERZURUM" },
+        { id: 7, syllables: ["YA", "RAF", "NOG", "ET"], answer: "ETNOGRAFYA" },
+        { id: 8, syllables: ["LİK", "EV", "Lİ"], answer: "EVLİLİK" },
+        { id: 9, syllables: ["Rİ", "KA", "FAB"], answer: "FABRİKA" },
+        { id: 10, syllables: ["FE", "KET", "LA"], answer: "FELAKET" },
+        { id: 11, syllables: ["FE", "DE", "YON", "RAS"], answer: "FEDERASYON" },
+        { id: 12, syllables: ["Cİ", "FEL", "FE", "SE"], answer: "FELSEFECİ" },
+        { id: 13, syllables: ["TI", "NA", "FIR"], answer: "FIRTINA" },
+      ],
+    },
+    exercise10: {
+      title: "Etkinlik 10",
+      description: "Hızlı Okuma - Hece Birleştirme",
+      exercises: [
+        { id: 1, syllables: ["LER", "Lİ", "Fİ", "PİN"], answer: "FİLİPİNLER" },
+        { id: 2, syllables: ["LAK", "Sİ", "GA"], answer: "GALAKSİ" },
+        { id: 3, syllables: ["GE", "ME", "LİŞ"], answer: "GELİŞME" },
+        { id: 4, syllables: ["GE", "GEN", "ZE"], answer: "GEZEGEN" },
+        { id: 5, syllables: ["NÜL", "LÜ", "GÖ"], answer: "GÖNÜLLÜ" },
+        { id: 6, syllables: ["EVİ", "LEM", "GÖZ"], answer: "GÖZLEMEVİ" },
+        { id: 7, syllables: ["MÜŞ", "NE", "GÜ", "HA"], answer: "GÜMÜŞHANE" },
+        { id: 8, syllables: ["GAH", "GÜ", "ZER"], answer: "GÜZERGAH" },
+        { id: 9, syllables: ["HA", "SE", "Dİ"], answer: "HADİSE" },
+        { id: 10, syllables: ["Lİ", "KAT", "HA", "Kİ"], answer: "HAKİKATLİ" },
+        { id: 11, syllables: ["DA", "HAK", "MIZ", "KI"], answer: "HAKKIMIZDA" },
+        { id: 12, syllables: ["LİK", "Lİ", "HA", "FE"], answer: "HALİFELİK" },
+        { id: 13, syllables: ["HA", "RA", "TI"], answer: "HATIRA" },
+      ],
+    },
+    exercise11: {
+      title: "Etkinlik 11",
+      description: "Hızlı Okuma - Hece Birleştirme",
+      exercises: [
+        {
+          id: 1,
+          syllables: ["STAN", "Tİ", "HIR", "VA"],
+          answer: "HIRVATİSTAN",
+        },
+        { id: 2, syllables: ["YAN", "Tİ", "HRİS"], answer: "HRİSTİYAN" },
+        { id: 3, syllables: ["I", "MA", "SIN"], answer: "ISINMA" },
+        { id: 4, syllables: ["Tİ", "YAÇ", "İH"], answer: "İHTİYAÇ" },
+        { id: 5, syllables: ["BA", "HAR", "İLK"], answer: "İLKBAHAR" },
+        { id: 6, syllables: ["SON", "HAR", "BA"], answer: "SONBAHAR" },
+        { id: 7, syllables: ["CE", "İN", "LİZ", "Gİ"], answer: "İNGİLİZCE" },
+        { id: 8, syllables: ["MEK", "DE", "İR", "LE"], answer: "İRDELEMEK" },
+        { id: 9, syllables: ["YET", "İS", "LA", "Mİ"], answer: "İSLAMİYET" },
+        { id: 10, syllables: ["NAV", "KAN", "Dİ", "İS"], answer: "İSKANDİNAV" },
+        { id: 11, syllables: ["RAR", "TİK", "LI", "İS"], answer: "İSTİKRARLI" },
+        { id: 12, syllables: ["İŞ", "Cİ", "LET", "ME"], answer: "İŞLETMECİ" },
+        { id: 13, syllables: ["TAL", "CA", "İ", "YAN"], answer: "İTALYANCA" },
+      ],
+    },
+    exercise12: {
+      title: "Etkinlik 12",
+      description: "Hızlı Okuma - Hece Birleştirme",
+      exercises: [
+        { id: 1, syllables: ["LAN", "DA", "İZ"], answer: "İZLANDA" },
+        { id: 2, syllables: ["LOG", "JE", "O"], answer: "JEOLOG" },
+        { id: 3, syllables: ["YI", "BA", "KA", "DA"], answer: "KABADAYI" },
+        { id: 4, syllables: ["DA", "YIF", "KA"], answer: "KADAYIF" },
+        { id: 5, syllables: ["KA", "KÖY", "DI"], answer: "KADIKÖY" },
+        { id: 6, syllables: ["Gİ", "KAH", "REN", "VE"], answer: "KAHVERENGİ" },
+        { id: 7, syllables: ["NİZ", "KA", "DE", "RA"], answer: "KARADENİZ" },
+        { id: 8, syllables: ["RAR", "GAH", "KA"], answer: "KARARGAH" },
+        { id: 9, syllables: ["KAR", "NAT", "BO"], answer: "KARBONAT" },
+        { id: 10, syllables: ["NIM", "KA", "ZA"], answer: "KAZANIM" },
+        { id: 11, syllables: ["Jİ", "LO", "KRİP", "TO"], answer: "KRİPTOLOJİ" },
+        { id: 12, syllables: ["ŞAT", "KU", "MA"], answer: "KUŞATMA" },
+        { id: 13, syllables: ["LA", "RENT", "Bİ"], answer: "LABİRENT" },
+      ],
+    },
   };
 
   const handleAnswerChange = (id, value) => {
@@ -198,6 +298,15 @@ export default function HeceOzel({ visibleSetKeys = null }) {
     } else if (timeLeft === 0) {
       setIsTimerRunning(false);
       setShowResults(true);
+      // Süre dolduğunda uyarı sesi çal
+      if (timeUpAudioRef.current) {
+        try {
+          timeUpAudioRef.current.currentTime = 0;
+          timeUpAudioRef.current.play();
+        } catch (e) {
+          // Sessizce geç
+        }
+      }
     }
     return () => clearInterval(interval);
   }, [isTimerRunning, timeLeft]);
@@ -232,6 +341,36 @@ export default function HeceOzel({ visibleSetKeys = null }) {
     ? exerciseSets[selectedExercise].exercises
     : [];
 
+  // Etkinlikler arası sıra ve gezinme
+  const exerciseKeys = Object.keys(exerciseSets);
+  const totalExerciseCount = exerciseKeys.length;
+  const currentExerciseIndex = selectedExercise
+    ? exerciseKeys.indexOf(selectedExercise)
+    : -1;
+
+  const goToExerciseByIndex = (newIndex) => {
+    if (newIndex < 0 || newIndex >= totalExerciseCount) return;
+    const nextKey = exerciseKeys[newIndex];
+    setSelectedExercise(nextKey);
+    setAnswers({});
+    setShowResults(false);
+    if (selectedDifficulty) {
+      setTimeLeft(difficultyTimes[selectedDifficulty]);
+      setIsTimerRunning(true);
+    }
+    setIsExerciseStarted(true);
+  };
+
+  const goToPrevExercise = () => {
+    if (currentExerciseIndex <= 0) return;
+    goToExerciseByIndex(currentExerciseIndex - 1);
+  };
+
+  const goToNextExercise = () => {
+    if (currentExerciseIndex >= totalExerciseCount - 1) return;
+    goToExerciseByIndex(currentExerciseIndex + 1);
+  };
+
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case "easy":
@@ -264,6 +403,12 @@ export default function HeceOzel({ visibleSetKeys = null }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button
@@ -544,6 +689,181 @@ export default function HeceOzel({ visibleSetKeys = null }) {
                 </div>
               </div>
             )}
+
+            {/* Etkinlik 8 Kartı */}
+            {(!visibleSetKeys || visibleSetKeys.includes("exercise8")) && (
+              <div className="bg-white rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-teal-100 rounded-full w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <span className="text-lg font-bold text-teal-600">8</span>
+                </div>
+                <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                  Etkinlik 8
+                </h2>
+                <p className="text-xs text-gray-600 mb-2">Hece Birleştirme</p>
+                <p className="text-xs text-gray-500 mb-3">15 satır</p>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => startExercise("exercise8", "easy")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Kolay (90s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise8", "medium")}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Orta (60s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise8", "hard")}
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Zor (30s)
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Etkinlik 9 Kartı */}
+            {(!visibleSetKeys || visibleSetKeys.includes("exercise9")) && (
+              <div className="bg-white rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-emerald-100 rounded-full w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <span className="text-lg font-bold text-emerald-600">9</span>
+                </div>
+                <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                  Etkinlik 9
+                </h2>
+                <p className="text-xs text-gray-600 mb-2">Hece Birleştirme</p>
+                <p className="text-xs text-gray-500 mb-3">13 satır</p>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => startExercise("exercise9", "easy")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Kolay (90s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise9", "medium")}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Orta (60s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise9", "hard")}
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Zor (30s)
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Etkinlik 10 Kartı */}
+            {(!visibleSetKeys || visibleSetKeys.includes("exercise10")) && (
+              <div className="bg-white rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-cyan-100 rounded-full w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <span className="text-lg font-bold text-cyan-600">10</span>
+                </div>
+                <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                  Etkinlik 10
+                </h2>
+                <p className="text-xs text-gray-600 mb-2">Hece Birleştirme</p>
+                <p className="text-xs text-gray-500 mb-3">13 satır</p>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => startExercise("exercise10", "easy")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Kolay (90s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise10", "medium")}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Orta (60s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise10", "hard")}
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Zor (30s)
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Etkinlik 11 Kartı */}
+            {(!visibleSetKeys || visibleSetKeys.includes("exercise11")) && (
+              <div className="bg-white rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-amber-100 rounded-full w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <span className="text-lg font-bold text-amber-600">11</span>
+                </div>
+                <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                  Etkinlik 11
+                </h2>
+                <p className="text-xs text-gray-600 mb-2">Hece Birleştirme</p>
+                <p className="text-xs text-gray-500 mb-3">13 satır</p>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => startExercise("exercise11", "easy")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Kolay (90s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise11", "medium")}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Orta (60s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise11", "hard")}
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Zor (30s)
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Etkinlik 12 Kartı */}
+            {(!visibleSetKeys || visibleSetKeys.includes("exercise12")) && (
+              <div className="bg-white rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-lime-100 rounded-full w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                  <span className="text-lg font-bold text-lime-600">12</span>
+                </div>
+                <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                  Etkinlik 12
+                </h2>
+                <p className="text-xs text-gray-600 mb-2">Hece Birleştirme</p>
+                <p className="text-xs text-gray-500 mb-3">13 satır</p>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => startExercise("exercise12", "easy")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Kolay (90s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise12", "medium")}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Orta (60s)
+                  </button>
+                  <button
+                    onClick={() => startExercise("exercise12", "hard")}
+                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-lg transition duration-200 shadow-lg w-full text-xs"
+                  >
+                    Zor (30s)
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <>
@@ -577,8 +897,11 @@ export default function HeceOzel({ visibleSetKeys = null }) {
                   {exerciseSets[selectedExercise]?.title} -{" "}
                   {getDifficultyText(selectedDifficulty)} Seviye
                 </h3>
-                <div className="text-4xl font-bold text-blue-600 mb-4">
+                <div className="text-4xl font-bold text-blue-600 mb-2">
                   {formatTime(timeLeft)}
+                </div>
+                <div className="text-sm text-gray-600 mb-2">
+                  Etkinlik {currentExerciseIndex + 1}/{totalExerciseCount}
                 </div>
                 <p className="text-gray-600">
                   {timeLeft > 0 ? "Süre devam ediyor..." : "Süre doldu!"}
@@ -620,6 +943,12 @@ export default function HeceOzel({ visibleSetKeys = null }) {
                         onChange={(e) =>
                           handleAnswerChange(exercise.id, e.target.value)
                         }
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            checkAnswers();
+                          }
+                        }}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Kelimeyi yazın..."
                       />
@@ -639,6 +968,35 @@ export default function HeceOzel({ visibleSetKeys = null }) {
               </div>
             ) : (
               <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+                {/* Özet: Doğru sayısı ve yüzde */}
+                {(() => {
+                  const total = currentExercises.length;
+                  const correct = currentExercises.reduce((acc, ex) => {
+                    const userAnswer = (answers[ex.id] || "").toLowerCase();
+                    const real = (ex.answer || "").toLowerCase();
+                    return acc + (userAnswer === real ? 1 : 0);
+                  }, 0);
+                  const percent =
+                    total > 0 ? Math.round((correct / total) * 100) : 0;
+                  return (
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                      <div className="text-lg font-semibold text-gray-800">
+                        Sonuç: {correct}/{total} doğru
+                      </div>
+                      <div className="w-full sm:w-64">
+                        <div className="w-full bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-green-500 h-3 rounded-full transition-all"
+                            style={{ width: `${percent}%` }}
+                          ></div>
+                        </div>
+                        <div className="text-right text-sm text-gray-600 mt-1">
+                          %{percent}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 text-center font-semibold text-gray-700 bg-gray-100 p-3 rounded">
                   <div>No</div>
                   <div>Heceler</div>
@@ -694,9 +1052,86 @@ export default function HeceOzel({ visibleSetKeys = null }) {
                   >
                     Yeniden Başla
                   </button>
+                  <button
+                    onClick={goToNextExercise}
+                    disabled={currentExerciseIndex >= totalExerciseCount - 1}
+                    className={`inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-lg ${
+                      currentExerciseIndex >= totalExerciseCount - 1
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
+                  >
+                    Sonraki Etkinliğe Geç
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
             )}
+
+            {/* Etkinlikler arası gezinme */}
+            <div className="flex items-center justify-between gap-4">
+              <button
+                onClick={goToPrevExercise}
+                disabled={currentExerciseIndex <= 0}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-md font-semibold transition-colors ${
+                  currentExerciseIndex <= 0
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-gray-600 hover:bg-gray-700 text-white"
+                }`}
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Önceki Etkinlik
+              </button>
+
+              <button
+                onClick={goToNextExercise}
+                disabled={currentExerciseIndex >= totalExerciseCount - 1}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-md font-semibold transition-colors ${
+                  currentExerciseIndex >= totalExerciseCount - 1
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                Sonraki Etkinlik
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
           </>
         )}
       </div>

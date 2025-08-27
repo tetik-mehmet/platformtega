@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 export default function TamamlaPage() {
@@ -20,6 +20,7 @@ export default function TamamlaPage() {
   const [extraTextFeedback, setExtraTextFeedback] = useState({});
   const [extraTextShowFeedback, setExtraTextShowFeedback] = useState({});
   const [extraTextScore, setExtraTextScore] = useState(0);
+  const timeUpAudioRef = useRef(null);
 
   // Görüntüdeki yeni metin paragrafı - eksik harfler _ ile işaretlenmiş
   const originalText = `H_zlı oku_a, bireylerin metinleri daha kısa s_rede ve an_ayarak okuyabilmesini sağlayan bir okuma te_niğidir. Temel amacı, okuma hı_ını artırı_ken anlama oranını da koruma. ya da geliştirmektir. G_nümüzde bil_iye ulaşımın ol_ukça kolaylaştığı ancak zamanın daha kı_metli hale geldiği bir ça_da yaşıyoruz. Bu nedenle _ızlı ve e_kili okumak, hem öğrenciler hem _e profesyoneller i_in büyük bir avantaj sa_lar. Hızlı okuma tekni_leri, _elimeleri tek tek okumak yerine gru_lar halinde gö_meyi ve anla_ayı öğretir. Beyin, belirli bir hızdan sonra da_a _erimli çalıştığı için, bu _öntemle okunan metin daha kolay anla_ılır hale ge_ir. Ayrıca göz kap_klarının e_itilmesi ve geri dönüş hareke_lerinin a_altılması da okuma süre_ini önemli öl_üde kısaltır. Bu beceri, yalnız_a hız değil, aynı _amanda dikka_ve odaklanma gibi bili_sel yetenekleri de gel_ştirir. Hızlı okuma e_itimi alan kişiler, _etinler üzerinde daha fazla hâkimiye_kurar ve önemli bilgileri kolayca ayıklayabilir. Özellikle sına_lara hazırlanan öğrenciler için_aman yö_etimi açısından bü_ük bir katkı sağlar.`;
@@ -168,6 +169,15 @@ export default function TamamlaPage() {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
     } else if (timeLeft === 0) {
+      // Süre dolduğunda uyarı sesi çal
+      if (timeUpAudioRef.current) {
+        try {
+          timeUpAudioRef.current.currentTime = 0;
+          timeUpAudioRef.current.play();
+        } catch (e) {
+          // sessiz geç
+        }
+      }
       checkFinalScore();
     }
     return () => clearInterval(timer);
@@ -315,6 +325,12 @@ export default function TamamlaPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+          <audio
+            ref={timeUpAudioRef}
+            src="/sesler/doldu.mp3"
+            preload="auto"
+            hidden
+          />
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
             Oyun Tamamlandı!
           </h1>
@@ -349,6 +365,12 @@ export default function TamamlaPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+          <audio
+            ref={timeUpAudioRef}
+            src="/sesler/doldu.mp3"
+            preload="auto"
+            hidden
+          />
           {/* Geri Dön Butonu */}
           <div className="text-left mb-6">
             <button
@@ -421,6 +443,12 @@ export default function TamamlaPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button

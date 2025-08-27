@@ -84,18 +84,36 @@ export default function Home() {
         >
           Daha hızlı oku, daha çok anla, zamandan tasarruf et!
         </motion.p>
+
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+          className="mb-6 flex justify-center"
+        >
+          <Image
+            src="/guncellogo.png"
+            alt="TEGA Akademi Logo"
+            width={120}
+            height={120}
+            className="drop-shadow-2xl filter brightness-110 rounded-3xl"
+            priority
+          />
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="text-3xl text-orange-600 font-bold text-gray-900 mb-2"
         >
-          TEGA AKADEMİ
+          TEGA AKADEMİ DİJİTAL EĞİTİM PLATFORMU
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-2 text-base max-w-md mx-auto text-gray-600"
         >
           Hızlı okuma becerinizi sade ve etkili alıştırmalarla geliştirin.

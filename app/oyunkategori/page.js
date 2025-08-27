@@ -89,8 +89,8 @@ export default function OyunKategoriPage() {
     },
     {
       id: 3,
-      title: "Doğru Şekil",
-      description: "Görsel algınızı geliştirin ve detayları yakalayın",
+      title: "Bul ve Kaybet",
+      description: "Renk kaybolmadan hedefi bulun",
       icon: (
         <svg
           className="w-10 h-10"
@@ -102,96 +102,15 @@ export default function OyunKategoriPage() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"
           />
         </svg>
       ),
-      link: "/dogru-sekil",
-      color: "purple",
-      gradient: "from-purple-500 via-purple-600 to-pink-600",
-      shadow: "shadow-purple-500/30",
-      glow: "shadow-purple-500/50",
-    },
-    {
-      id: 4,
-      title: "Puzzle",
-      description: "Parçaları birleştirin ve resmi tamamlayın",
-      icon: (
-        <svg
-          className="w-10 h-10"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-          />
-        </svg>
-      ),
-      link: "/puzzle",
-      color: "orange",
-      gradient: "from-orange-500 via-orange-600 to-red-600",
-      shadow: "shadow-orange-500/30",
-      glow: "shadow-orange-500/50",
-    },
-    {
-      id: 5,
-      title: "Labirent",
-      description: "Yolu bulun ve çıkışa ulaşın",
-      icon: (
-        <svg
-          className="w-10 h-10"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3"
-          />
-        </svg>
-      ),
-      link: "/labirent",
-      color: "teal",
-      gradient: "from-teal-500 via-teal-600 to-cyan-600",
-      shadow: "shadow-teal-500/30",
-      glow: "shadow-teal-500/50",
-    },
-    {
-      id: 6,
-      title: "Noktaları Bulalım",
-      description: "Gizli noktaları bulun ve görsel algınızı geliştirin",
-      icon: (
-        <svg
-          className="w-10 h-10"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-          />
-        </svg>
-      ),
-      link: "/noktalari-bulalim",
-      color: "pink",
-      gradient: "from-pink-500 via-pink-600 to-rose-600",
-      shadow: "shadow-pink-500/30",
-      glow: "shadow-pink-500/50",
+      link: "/renk-kaybolma",
+      color: "cyan",
+      gradient: "from-cyan-500 via-sky-600 to-blue-600",
+      shadow: "shadow-cyan-500/30",
+      glow: "shadow-cyan-500/50",
     },
   ];
 

@@ -48,8 +48,8 @@ export default function LoginPage() {
 
         console.log("🚀 Genel sayfasına yönlendiriliyor...");
 
-        // GEÇİCİ: Basit yönlendirme
-        window.location.href = "/genel";
+        // Router ile yönlendirme
+        router.push("/genel");
       } else {
         console.log("❌ Login failed:", data.message);
         setError(

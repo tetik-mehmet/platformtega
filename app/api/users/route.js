@@ -3,7 +3,7 @@ import { getUsers } from "@/lib/users.js";
 
 export async function GET() {
   try {
-    const users = getUsers();
+    const users = await getUsers();
 
     console.log("=== USERS API DEBUG ===");
     console.log("Kullanıcı sayısı:", users.length);
@@ -15,7 +15,7 @@ export async function GET() {
 
     // Şifreleri gizle
     const safeUsers = users.map((user) => ({
-      id: user.id,
+      id: user._id,
       name: user.name,
       surname: user.surname,
       email: user.email,

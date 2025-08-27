@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const hayvanlar = [
@@ -11,6 +11,7 @@ const hayvanlar = [
     heceler: ["kan", "gu", "ru"],
     bilgi:
       "Kangurular Avustralya'da yaşar ve yavrularını karınlarındaki keselerinde taşır. Bir zıplayışta 9 metre mesafe kat edebilirler!",
+    ses: "/sesler/kanguru.mp3",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const hayvanlar = [
     heceler: ["pa", "pa", "ğan"],
     bilgi:
       "Papaganlar çok zeki kuşlardır ve insan seslerini taklit edebilirler. Bazı türleri 80 yıla kadar yaşayabilir!",
+    ses: "/sesler/papagan.mp3",
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const hayvanlar = [
     heceler: ["kur", "ba", "ğa"],
     bilgi:
       "Kurbağalar hem karada hem suda yaşayabilir. Derileri nemli olmalıdır ve yumurtalarını suya bırakırlar.",
+    ses: "/sesler/kurbaga.mp3",
   },
   {
     id: 4,
@@ -35,6 +38,7 @@ const hayvanlar = [
     heceler: ["ka", "rın", "ca"],
     bilgi:
       "Karıncalar çok çalışkan böceklerdir. Bir kolonide milyonlarca karınca bulunabilir ve hepsi birlikte çalışır!",
+    ses: "/sesler/karinca.mp3",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ const hayvanlar = [
     heceler: ["zü", "ra", "fa"],
     bilgi:
       "Zürafalar dünyanın en uzun hayvanlarıdır. Boyunları 2 metre uzunluğunda olabilir ve kalpleri çok güçlüdür!",
+    ses: "/sesler/zurafa.mp3",
   },
   {
     id: 6,
@@ -51,6 +56,7 @@ const hayvanlar = [
     heceler: ["pen", "gu", "en"],
     bilgi:
       "Penguenler uçamaz ama çok iyi yüzücüdürler. Antarktika'nın soğuk sularında balık avlayabilirler!",
+    ses: "/sesler/penguen.mp3",
   },
   {
     id: 7,
@@ -59,6 +65,7 @@ const hayvanlar = [
     heceler: ["ah", "ta", "pot"],
     bilgi:
       "Ahtapotlar çok zeki deniz canlılarıdır. 8 kolları vardır ve tehlike anında mürekkep püskürterek kaçabilirler!",
+    ses: "/sesler/doldu.mp3", // Ahtapot sesi yok, doldu sesi kullanılıyor
   },
   {
     id: 8,
@@ -67,6 +74,7 @@ const hayvanlar = [
     heceler: ["kap", "lum", "ba", "ğa"],
     bilgi:
       "Kaplumbağalar çok uzun ömürlü sürüngenlerdir. Bazı türleri 150 yıla kadar yaşayabilir ve kabukları ev olarak kullanır!",
+    ses: "/sesler/kaplumbaga.mp3",
   },
   {
     id: 9,
@@ -75,6 +83,7 @@ const hayvanlar = [
     heceler: ["ya", "ra", "sa"],
     bilgi:
       "Yarasalar memeli hayvanlardır ve uçabilen tek memeli türüdür. Karanlıkta yön bulmak için ses dalgalarını kullanırlar!",
+    ses: "/sesler/yarasa.mp3",
   },
   {
     id: 10,
@@ -83,6 +92,7 @@ const hayvanlar = [
     heceler: ["bay", "kuş"],
     bilgi:
       "Baykuşlar gece avlanan yırtıcı kuşlardır. Çok keskin görüşleri vardır ve başlarını 270 derece döndürebilirler!",
+    ses: "/sesler/baykus.mp3",
   },
   {
     id: 11,
@@ -91,6 +101,7 @@ const hayvanlar = [
     heceler: ["as", "lan"],
     bilgi:
       "Aslanlar ormanın kralı olarak bilinir. Sosyal hayvanlardır ve sürü halinde yaşarlar. Erkek aslanların yelesi vardır!",
+    ses: "/sesler/aslan.mp3",
   },
   {
     id: 12,
@@ -99,6 +110,7 @@ const hayvanlar = [
     heceler: ["yu", "nus"],
     bilgi:
       "Yunuslar çok zeki deniz memelileridir. Ekolokasyon kullanarak yön bulurlar ve insanlarla iletişim kurabilirler!",
+    ses: "/sesler/yunus.mp3",
   },
   {
     id: 13,
@@ -107,6 +119,7 @@ const hayvanlar = [
     heceler: ["kar", "tal"],
     bilgi:
       "Kartallar çok güçlü yırtıcı kuşlardır. Çok keskin görüşleri vardır ve yüksekten avlarını tespit edebilirler!",
+    ses: "/sesler/kartal.mp3",
   },
   {
     id: 14,
@@ -115,6 +128,7 @@ const hayvanlar = [
     heceler: ["go", "ril"],
     bilgi:
       "Goriller insanlara en yakın hayvanlardan biridir. Çok güçlü ve zeki maymunlardır. Aile grupları halinde yaşarlar!",
+    ses: "/sesler/goril.mp3",
   },
   {
     id: 15,
@@ -123,6 +137,7 @@ const hayvanlar = [
     heceler: ["ge", "yik"],
     bilgi:
       "Geyikler zarif ve hızlı hayvanlardır. Erkek geyiklerin boynuzları vardır ve her yıl yenilenir!",
+    ses: "/sesler/doe.mp3",
   },
   {
     id: 16,
@@ -131,6 +146,7 @@ const hayvanlar = [
     heceler: ["ker", "ten", "ke", "le"],
     bilgi:
       "Kertenkeleler sürüngenlerdir ve çok hızlı hareket edebilirler. Tehlike anında kuyruklarını bırakıp kaçabilirler!",
+    ses: "/sesler/kertenkele.mp3",
   },
   {
     id: 17,
@@ -139,6 +155,7 @@ const hayvanlar = [
     heceler: ["fa", "re"],
     bilgi:
       "Fareler çok zeki kemirgenlerdir. Çok hızlı ürerler ve farklı ortamlarda yaşayabilirler!",
+    ses: "/sesler/fare.mp3",
   },
   {
     id: 18,
@@ -147,6 +164,7 @@ const hayvanlar = [
     heceler: ["a", "rı"],
     bilgi:
       "Arılar çok önemli böceklerdir. Çiçeklerden nektar toplar ve bal yaparlar. Bitkilerin tozlaşmasına yardım ederler!",
+    ses: "/sesler/cancel.mp3", // Arı sesi yok, cancel sesi kullanılıyor
   },
   {
     id: 19,
@@ -155,6 +173,7 @@ const hayvanlar = [
     heceler: ["do", "muz"],
     bilgi:
       "Domuzlar çok zeki çiftlik hayvanlarıdır. Çok iyi koku alırlar ve her şeyi yerler!",
+    ses: "/sesler/domuz.mp3",
   },
   {
     id: 20,
@@ -163,6 +182,7 @@ const hayvanlar = [
     heceler: ["va", "toz"],
     bilgi:
       "Vatozlar deniz tabanında yaşayan balıklardır. Çok geniş yüzgeçleri vardır ve zararsızdırlar!",
+    ses: "/sesler/pause.mp3", // Vatoz sesi yok, pause sesi kullanılıyor
   },
   {
     id: 21,
@@ -171,6 +191,7 @@ const hayvanlar = [
     heceler: ["kir", "pi"],
     bilgi:
       "Kirpiler dikenli memelilerdir. Tehlike anında top gibi olup dikenlerini çıkarırlar!",
+    ses: "/sesler/unpause.mp3", // Kirpi sesi yok, unpause sesi kullanılıyor
   },
   {
     id: 22,
@@ -179,6 +200,7 @@ const hayvanlar = [
     heceler: ["ke", "di"],
     bilgi:
       "Kediler evcil hayvanlardır. Çok temizdirler ve kendilerini yalayarak temizlerler!",
+    ses: "/sesler/cancel.mp3", // Kedi sesi yok, cancel sesi kullanılıyor
   },
   {
     id: 23,
@@ -187,6 +209,7 @@ const hayvanlar = [
     heceler: ["kö", "pek"],
     bilgi:
       "Köpekler insanın en iyi dostudur. Çok sadık ve zeki hayvanlardır. Farklı türleri vardır!",
+    ses: "/sesler/kurt.mp3", // Köpek sesi yok, kurt sesi kullanılıyor
   },
   {
     id: 24,
@@ -195,6 +218,7 @@ const hayvanlar = [
     heceler: ["cey", "lan"],
     bilgi:
       "Ceylanlar çok zarif ve hızlı hayvanlardır. Çöllerde yaşarlar ve çok az su ile hayatta kalabilirler!",
+    ses: "/sesler/doe.mp3", // Ceylan sesi yok, geyik sesi kullanılıyor
   },
   {
     id: 25,
@@ -203,6 +227,7 @@ const hayvanlar = [
     heceler: ["i", "nek"],
     bilgi:
       "İnekler çiftlik hayvanlarıdır. Süt verirler ve çok sakin hayvanlardır!",
+    ses: "/sesler/inek.mp3",
   },
   {
     id: 26,
@@ -210,6 +235,7 @@ const hayvanlar = [
     resim: "/resimler/kuzu.png",
     heceler: ["ku", "zu"],
     bilgi: "Kuzular genç koyunlardır. Çok sevimli ve yumuşak yünleri vardır!",
+    ses: "/sesler/kuzu.mp3",
   },
   {
     id: 27,
@@ -218,6 +244,7 @@ const hayvanlar = [
     heceler: ["a", "yı"],
     bilgi:
       "Ayılar çok güçlü memelilerdir. Kışın kış uykusuna yatarlar ve çok iyi balık avcılarıdır!",
+    ses: "/sesler/ayi.mp3",
   },
   {
     id: 28,
@@ -226,6 +253,7 @@ const hayvanlar = [
     heceler: ["ger", "ge", "dan"],
     bilgi:
       "Gergedanlar çok güçlü memelilerdir. Boynuzları vardır ve çok kalın derileri vardır!",
+    ses: "/sesler/gergedan.mp3",
   },
   {
     id: 29,
@@ -234,6 +262,7 @@ const hayvanlar = [
     heceler: ["may", "mun"],
     bilgi:
       "Maymunlar çok zeki primatlardır. Ağaçlarda yaşarlar ve çok sosyal hayvanlardır!",
+    ses: "/sesler/maymun.mp3",
   },
   {
     id: 30,
@@ -242,6 +271,7 @@ const hayvanlar = [
     heceler: ["sin", "cap"],
     bilgi:
       "Sincaplar çok sevimli kemirgenlerdir. Ağaçlarda yaşarlar ve fındık toplarlar!",
+    ses: "/sesler/sincap.mp3",
   },
   {
     id: 31,
@@ -250,6 +280,7 @@ const hayvanlar = [
     heceler: ["kap", "lan"],
     bilgi:
       "Kaplanlar çok güçlü yırtıcı kedilerdir. Çizgili desenleri vardır ve çok iyi avcılardır!",
+    ses: "/sesler/kaplan.mp3",
   },
 ];
 
@@ -259,8 +290,50 @@ export default function HayvanKartlari() {
   const [showBitisik, setShowBitisik] = useState(false);
   const [showBilgi, setShowBilgi] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   const currentHayvan = hayvanlar[currentHayvanIndex];
+
+  // Ses çalma fonksiyonu
+  const playHayvanSesi = () => {
+    if (audioRef.current && currentHayvan.ses) {
+      audioRef.current.src = currentHayvan.ses;
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  // Ses durma fonksiyonu
+  const stopHayvanSesi = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
+  // Ses bittiğinde state'i güncelle
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      const handleEnded = () => setIsPlaying(false);
+      audio.addEventListener("ended", handleEnded);
+      return () => audio.removeEventListener("ended", handleEnded);
+    }
+  }, []);
+
+  // Bilgi gösterildiğinde ses çal
+  useEffect(() => {
+    if (showBilgi && currentHayvan.ses) {
+      playHayvanSesi();
+    }
+  }, [showBilgi, currentHayvan.ses]);
+
+  // Hayvan değiştiğinde sesi durdur
+  useEffect(() => {
+    stopHayvanSesi();
+  }, [currentHayvanIndex]);
 
   const handleIleri = () => {
     if (!isCompleted) {
@@ -289,6 +362,7 @@ export default function HayvanKartlari() {
   const handleGeri = () => {
     if (showBilgi) {
       setShowBilgi(false);
+      stopHayvanSesi();
     } else if (showBitisik) {
       setShowBitisik(false);
     } else if (currentHecelerIndex > 0) {
@@ -301,6 +375,7 @@ export default function HayvanKartlari() {
     setShowBitisik(false);
     setShowBilgi(false);
     setIsCompleted(false);
+    stopHayvanSesi();
   };
 
   const getDisplayText = () => {
@@ -337,6 +412,9 @@ export default function HayvanKartlari() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      {/* Audio element */}
+      <audio ref={audioRef} preload="auto" />
+
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -401,9 +479,39 @@ export default function HayvanKartlari() {
           <div className="text-center mb-8">
             <div className="min-h-[80px] flex items-center justify-center">
               {showBilgi ? (
-                <p className="text-lg text-gray-700 leading-relaxed max-w-2xl">
-                  {getDisplayText()}
-                </p>
+                <div className="text-center">
+                  <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-4">
+                    {getDisplayText()}
+                  </p>
+                  {/* Ses Kontrol Butonu */}
+                  {currentHayvan.ses && (
+                    <div className="flex justify-center items-center gap-3">
+                      <button
+                        onClick={isPlaying ? stopHayvanSesi : playHayvanSesi}
+                        className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${
+                          isPlaying
+                            ? "bg-red-500 text-white hover:bg-red-600"
+                            : "bg-green-500 text-white hover:bg-green-600"
+                        }`}
+                      >
+                        {isPlaying ? (
+                          <>
+                            <span className="text-lg">⏸️</span>
+                            Sesi Durdur
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-lg">🔊</span>
+                            Sesi Çal
+                          </>
+                        )}
+                      </button>
+                      <span className="text-sm text-gray-500">
+                        {currentHayvan.isim} sesi
+                      </span>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div className="text-center">
                   <div className="text-6xl font-bold text-indigo-800 mb-4">
@@ -447,7 +555,7 @@ export default function HayvanKartlari() {
         <div className="text-center text-gray-600">
           <p className="text-sm">
             Her hayvan için heceleri tek tek öğrenin, sonra kelimeyi ve ilginç
-            bilgileri keşfedin!
+            bilgileri keşfedin! Hayvan bilgisi gösterildiğinde ses de çalacak.
           </p>
         </div>
       </div>

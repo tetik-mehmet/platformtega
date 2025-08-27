@@ -209,6 +209,12 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
   const handleDrop = (e, blankId, exerciseNumber) => {
     e.preventDefault();
     if (draggedWord) {
+      // Ses dosyasını çal
+      const audio = new Audio("/oturma.mp3");
+      audio.play().catch((error) => {
+        console.log("Ses çalınamadı:", error);
+      });
+
       if (exerciseNumber === 1) {
         setAnswers1((prev) => ({
           ...prev,
@@ -256,6 +262,14 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
       });
       setScore1(correct);
       setShowResults1(true);
+
+      // Tüm cevaplar doğruysa success sesi çal
+      if (correct === Object.keys(correctAnswers1).length) {
+        const audio = new Audio("/success.mp3");
+        audio.play().catch((error) => {
+          console.log("Success sesi çalınamadı:", error);
+        });
+      }
     } else if (exerciseNumber === 2) {
       let correct = 0;
       Object.keys(correctAnswers2).forEach((blankId) => {
@@ -268,6 +282,14 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
       });
       setScore2(correct);
       setShowResults2(true);
+
+      // Tüm cevaplar doğruysa success sesi çal
+      if (correct === Object.keys(correctAnswers2).length) {
+        const audio = new Audio("/success.mp3");
+        audio.play().catch((error) => {
+          console.log("Success sesi çalınamadı:", error);
+        });
+      }
     } else if (exerciseNumber === 3) {
       let correct = 0;
       Object.keys(correctAnswers3).forEach((blankId) => {
@@ -280,6 +302,14 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
       });
       setScore3(correct);
       setShowResults3(true);
+
+      // Tüm cevaplar doğruysa success sesi çal
+      if (correct === Object.keys(correctAnswers3).length) {
+        const audio = new Audio("/success.mp3");
+        audio.play().catch((error) => {
+          console.log("Success sesi çalınamadı:", error);
+        });
+      }
     } else if (exerciseNumber === 4) {
       let correct = 0;
       Object.keys(correctAnswers4).forEach((blankId) => {
@@ -292,6 +322,14 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
       });
       setScore4(correct);
       setShowResults4(true);
+
+      // Tüm cevaplar doğruysa success sesi çal
+      if (correct === Object.keys(correctAnswers4).length) {
+        const audio = new Audio("/success.mp3");
+        audio.play().catch((error) => {
+          console.log("Success sesi çalınamadı:", error);
+        });
+      }
     } else {
       let correct = 0;
       Object.keys(correctAnswers5).forEach((blankId) => {
@@ -304,6 +342,14 @@ Mimar Sinan, yalnızca Osmanlı'nın değil, dünya mimarlık tarihinin de en b�
       });
       setScore5(correct);
       setShowResults5(true);
+
+      // Tüm cevaplar doğruysa success sesi çal
+      if (correct === Object.keys(correctAnswers5).length) {
+        const audio = new Audio("/success.mp3");
+        audio.play().catch((error) => {
+          console.log("Success sesi çalınamadı:", error);
+        });
+      }
     }
   };
 

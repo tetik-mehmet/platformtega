@@ -85,6 +85,73 @@ export default function TakipPage() {
         { left: "AÇI", right: "YAN", visible: true },
       ],
     },
+    {
+      id: 4,
+      title: "Kelime Eşleştirme 4",
+      description: "KALEM-MASA, KİTAP-RAF, ÇANTA-DOLAP...",
+      difficulty: "Orta",
+      wordCount: 12,
+      category: "Günlük Eşyalar",
+      disabled: false,
+      wordPairs: [
+        { left: "KALEM", right: "MASA", visible: true },
+        { left: "KİTAP", right: "RAF", visible: true },
+        { left: "ÇANTA", right: "DOLAP", visible: true },
+        { left: "TELEFON", right: "CEP", visible: true },
+        { left: "BİLGİSAYAR", right: "EKRAN", visible: true },
+        { left: "ÇAYDANLIK", right: "FİNCAN", visible: true },
+        { left: "TABAK", right: "ÇATAL", visible: true },
+        { left: "HAVLU", right: "BANYO", visible: true },
+        { left: "ÇORAP", right: "AYAKKABI", visible: true },
+        { left: "GÖZLÜK", right: "GÖZ", visible: true },
+        { left: "ŞAPKA", right: "KAFA", visible: true },
+        { left: "ELDİVEN", right: "EL", visible: true },
+      ],
+    },
+    {
+      id: 5,
+      title: "Kelime Eşleştirme 5",
+      description: "ASLAN-ORMAN, BALIK-DENİZ, KUŞ-GÖKYÜZÜ...",
+      difficulty: "Zor",
+      wordCount: 12,
+      category: "Hayvanlar ve Doğa",
+      disabled: false,
+      wordPairs: [
+        { left: "ASLAN", right: "ORMAN", visible: true },
+        { left: "BALIK", right: "DENİZ", visible: true },
+        { left: "KUŞ", right: "GÖKYÜZÜ", visible: true },
+        { left: "KARINCA", right: "TOPRAK", visible: true },
+        { left: "ARI", right: "ÇİÇEK", visible: true },
+        { left: "KURBAĞA", right: "GÖL", visible: true },
+        { left: "KAPLUMBAĞA", right: "KUM", visible: true },
+        { left: "KARTAL", right: "DAĞ", visible: true },
+        { left: "YUNUS", right: "OKYANUS", visible: true },
+        { left: "PANDA", right: "BAMBU", visible: true },
+        { left: "KANGURU", right: "AVUSTRALYA", visible: true },
+        { left: "ZÜRAFA", right: "SAVAN", visible: true },
+      ],
+    },
+    {
+      id: 6,
+      title: "Kelime Eşleştirme 6",
+      description: "KIRMIZI-ELMA, MAVİ-GÖKYÜZÜ, YEŞİL-ÇİMEN...",
+      difficulty: "Kolay",
+      wordCount: 10,
+      category: "Renkler ve Nesneler",
+      disabled: false,
+      wordPairs: [
+        { left: "KIRMIZI", right: "ELMA", visible: true },
+        { left: "MAVİ", right: "GÖKYÜZÜ", visible: true },
+        { left: "YEŞİL", right: "ÇİMEN", visible: true },
+        { left: "SARI", right: "GÜNEŞ", visible: true },
+        { left: "MOR", right: "ÜZÜM", visible: true },
+        { left: "TURUNCU", right: "PORTAKAL", visible: true },
+        { left: "PEMBE", right: "ÇİÇEK", visible: true },
+        { left: "KAHVERENGİ", right: "AĞAÇ", visible: true },
+        { left: "SİYAH", right: "GECE", visible: true },
+        { left: "BEYAZ", right: "KAR", visible: true },
+      ],
+    },
   ];
 
   const selectExercise = (exercise) => {
@@ -403,17 +470,17 @@ export default function TakipPage() {
                     key={index}
                     className="flex items-center justify-between bg-gray-50 rounded-lg p-4"
                   >
-                    <div className="text-2xl font-bold text-blue-600 w-24 text-center">
+                    <div className="text-2xl font-bold text-blue-600 w-40 text-center mr-3 whitespace-nowrap px-1">
                       {pair.left}
                     </div>
 
-                    <div className="flex items-center flex-1 mx-4">
+                    <div className="flex items-center flex-1 mx-8">
                       <div className="w-full h-1 bg-blue-500"></div>
                     </div>
 
-                    <div className="w-32">
+                    <div className="w-40 ml-3">
                       {pair.visible ? (
-                        <div className="text-2xl font-bold text-green-600 text-center">
+                        <div className="text-2xl font-bold text-green-600 text-center whitespace-nowrap px-1">
                           {pair.right}
                         </div>
                       ) : (

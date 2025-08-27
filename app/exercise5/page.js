@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -23,9 +23,6 @@ const DATASETS = [
       "B_HÇ_",
       "_K_L",
       "K_RP_Z",
-      "H_V_Z",
-      "M_S_",
-      "D_N_Z",
     ],
     answers: {
       _LM_: ["ELMA", "ALMA", "OLMA"],
@@ -43,9 +40,6 @@ const DATASETS = [
       B_HÇ_: ["BAHÇE", "BOHÇA"],
       _K_L: ["OKUL", "AKIL", "EKOL"],
       K_RP_Z: "KARPUZ",
-      H_V_Z: "HAVUZ",
-      M_S_: ["MASA", "MUSA"],
-      D_N_Z: "DENİZ",
     },
   },
   // Alıştırma 2 (ikinci görsel)
@@ -67,9 +61,6 @@ const DATASETS = [
       "A_L_",
       "A_EŞ",
       "A_E_",
-      "DO_T_R",
-      "Y_P_A_",
-      "GE_İ_",
     ],
     answers: {
       M_M_: "MAMA",
@@ -87,9 +78,82 @@ const DATASETS = [
       A_L_: ["AİLE", "AYLA", "ADLİ"],
       A_EŞ: "ATEŞ",
       A_E_: "ALEV",
+    },
+  },
+  // Alıştırma 3 (üçüncü görsel)
+  {
+    id: 3,
+    words: [
+      "G_Z_ÜK",
+      "_O_U",
+      "V_T_S",
+      "B_R_N",
+      "_ELE_ON",
+      "_A_AS",
+      "K_MB_RA",
+      "P_T_N",
+      "H_R_T_",
+      "T_RK",
+      "_L_AN",
+      "İN_İL_Z",
+      "K_RT",
+      "A_ER_K_",
+      "DE_E",
+    ],
+    answers: {
+      G_Z_ÜK: "GÖZLÜK",
+      _O_U: ["DOĞU", "DOLU", "KOLU"],
+      V_T_S: "VİTES",
+      B_R_N: "BURUN",
+      _ELE_ON: "TELEFON",
+      _A_AS: ["MAKAS", "TAKAS"],
+      K_MB_RA: "KUMBARA",
+      P_T_N: "PATEN",
+      H_R_T_: "HARİTA",
+      T_RK: "TÜRK",
+      _L_AN: "ALMAN",
+      İN_İL_Z: "İNGİLİZ",
+      K_RT: ["KURT", "KÜRT", "KART"],
+      A_ER_K_: "AMERİKA",
+      DE_E: ["DERE", "DEDE", "DEVE"],
+    },
+  },
+  // Alıştırma 4 (dördüncü görsel)
+  {
+    id: 4,
+    words: [
+      "DO_T_R",
+      "Y_P_A_",
+      "GE_İ_",
+      "D_N_Y",
+      "F_L_",
+      "S_AD_UM",
+      "D_N_Z",
+      "_AV_Z",
+      "M_S_",
+      "K_RT_L",
+      "G_Y_K",
+      "KA_G_R_",
+      "BA_İ_A",
+      "E_K_K",
+      "_A_I_",
+    ],
+    answers: {
       DO_T_R: "DOKTOR",
       Y_P_A_: "YAPRAK",
       GE_İ_: ["GELİN", "GELİR"],
+      D_N_Y: "DENEY",
+      F_L_: ["FİLE", "FİLO"],
+      S_AD_UM: "STADYUM",
+      D_N_Z: "DENİZ",
+      _AV_Z: "HAVUZ",
+      M_S_: ["MASA", "MUSA"],
+      K_RT_L: "KARTAL",
+      G_Y_K: "GEYİK",
+      KA_G_R_: "KANGURU",
+      BA_İ_A: "BALİNA",
+      E_K_K: "ERKEK",
+      _A_I_: "KADIN",
     },
   },
 ];
@@ -114,6 +178,7 @@ export default function Exercise5({
   embedded,
 } = {}) {
   const router = useRouter();
+  const timeUpAudioRef = useRef(null);
   const filteredDatasets = useMemo(() => {
     if (Array.isArray(visibleDatasetIds) && visibleDatasetIds.length > 0) {
       return DATASETS.filter((d) => visibleDatasetIds.includes(d.id));
@@ -150,6 +215,15 @@ export default function Exercise5({
           if (prevTime <= 1) {
             setIsTimerRunning(false);
             setShowResults(true);
+            // Süre dolduğunda uyarı sesi çal
+            if (timeUpAudioRef.current) {
+              try {
+                timeUpAudioRef.current.currentTime = 0;
+                timeUpAudioRef.current.play();
+              } catch (e) {
+                // Sessizce geç
+              }
+            }
             return 0;
           }
           return prevTime - 1;
@@ -328,6 +402,12 @@ export default function Exercise5({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button
@@ -402,6 +482,82 @@ export default function Exercise5({
             </button>
           )}
         </div>
+
+        {/* Numaralı Alıştırma Gezinme */}
+        {filteredDatasets.length > 1 && (
+          <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              {/* Sol ok */}
+              <button
+                onClick={() =>
+                  switchDataset(
+                    (datasetIndex - 1 + filteredDatasets.length) %
+                      filteredDatasets.length
+                  )
+                }
+                aria-label="Önceki alıştırma"
+                className="w-8 h-8 rounded-full border bg-orange-100 text-orange-700 border-orange-300 hover:bg-orange-200 flex items-center justify-center"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Numaralar */}
+              {filteredDatasets.map((d, idx) => (
+                <button
+                  key={d.id}
+                  onClick={() => switchDataset(idx)}
+                  disabled={idx === datasetIndex}
+                  aria-label={`Alıştırma ${idx + 1}`}
+                  className={`w-10 h-10 rounded-full border font-semibold transition-all ${
+                    idx === datasetIndex
+                      ? "bg-blue-600 text-white border-blue-600 cursor-default"
+                      : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                  }`}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+
+              {/* Sağ ok */}
+              <button
+                onClick={() =>
+                  switchDataset((datasetIndex + 1) % filteredDatasets.length)
+                }
+                aria-label="Sonraki alıştırma"
+                className="w-8 h-8 rounded-full border bg-orange-100 text-orange-700 border-orange-300 hover:bg-orange-200 flex items-center justify-center"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="text-center text-sm text-gray-500 mt-2">
+              Alıştırma {datasetIndex + 1} / {filteredDatasets.length}
+            </div>
+          </div>
+        )}
 
         {renderTable()}
 

@@ -15,6 +15,18 @@ const KAHVE_METNI = `Güne başlarken çoğumuzun ilk işi, sıcak bir kahve haz
 
 const SEVGI_METNI = `Sevgi nedir? Bu kelimenin gerçek anlamını biliyor muyuz, ya da düşündük mü? Sevgi üzerine herkes kendince bir fikir yürütür. Aslında sevgi, duyguların en iyisi ve en güzelidir. Güzel olduğu kadar da özveri gerektirir. Canlıların en gelişmişi, en akıllısı bile bu özveriye muhtaçtır. Yaşamak işin sağlığa, mutluluğa, paraya ne kadar ihtiyacın varsa karşılıklı sevgiye de o kadar ihtiyacımız vardır. Çünkü insanı sevgi kadar yücelten ve sevgi kadar mutlu eden unsur daha yoktur. Sevgisiz büyüyen bir çocuğun ruhsal ve bedensel gelişmesi normal olmayacağı gibi sosyal ilişiklileri de yeterli düzeyde olmaz. Sevgiden yoksun büyüyen bir kişinin nerede, ne zaman ne yapacağını kimse bilemez. Böyle bir insan ileriki yıllarında acımasız bir kişiliğe sahip olabilir. Bunun gibi sevgiden yoksun büyüyen bireylerden oluşan bir toplumda huzur, barış gelişmez ve hoşgörü beklenmez. Sevgi ve sevmek deyince akla sadece insanlara duyulan sevgi gelmemelidir. Bizler, çevremizdeki her şeye sevgi duyabiliriz. Örneğin kuşları, çiçekleri, ağaçları hatta eşyaları bile severiz. Kimisini bize bir şeyler ifade ettiği, kimisini de içimizden geldiği için severiz. Çevremizde bulunanlara ilgi göstermemiz, sevmemiz, aynı zamanda bizim insanlığımızı yansıtmaktadır. Çevremizdeki hayvanları sevmek, bizde onları koruma hissi uyandırır. Genellikle korumamız altındaki hayvanları, hayvan olarak değil, bir dost, bir arkadaş olarak görürüz. İnsanlara duyduğumuz sevgi ise, sevgilerin en yücesi ve en güzelidir. Sevgi insanları iyi, şefkatli birer birey haline getirir. İnsanın sevgiye ihtiyacı vardır. Çünkü sevgi insanı insan kılan en önemli gereksinimdir. Sevgi bir ihtiyaçtır. Çünkü onsuz yaşamak güçtür. Yine insan sevgiye muhtaçtır, çünkü yaşama arzusunu içinde sürekli tutabilmesi buna bağlıdır.`;
 
+const KITAP_METNI = `Üniversite yıllarında derslere hazırlanırken elimden hiç düşmeyen en önemli araç kitaptı. Her kitap farklı bir dünyanın kapısını aralıyor, bazen ders konularını daha iyi anlamamı sağlıyor, bazen de araştırma yaparken bana yol gösteriyordu. Özellikle bilgisayar mühendisliği derslerinde aldığım notların yanında mutlaka bir kitap bulunduruyordum. Çünkü kitap, sadece hocanın anlattıklarıyla sınırlı kalmayan ek bilgiler sunuyordu. Kütüphanede saatler geçirirken raflardan seçtiğim her kitap bana yeni bakış açıları kazandırdı. Kitap ile ders arasında kurduğum bu bağ, öğrenme hızımı ve motivasyonumu artırdı. Özellikle algoritmalar, veri yapıları ve yazılım mühendisliği konularında kitap okumak, pratik yaparken büyük kolaylık sağladı. Kitap bana sadece teknik bilgi vermedi; aynı zamanda sabırlı olmayı ve düzenli çalışmayı da öğretti. Çoğu zaman ders çalışırken önümde açık duran kitap, defter ve bilgisayar üçlüsü en verimli çalışma düzenimi oluşturuyordu. Her kitap satır satır ilerledikçe bana yeni sorular sorduruyor ve derslerde daha aktif olmama yardımcı oluyordu. Sonuçta, doğru seçilmiş bir kitap hem sınav başarısını hem de kişisel gelişimi doğrudan etkileyen en değerli kaynaktı.`;
+
+const DENIZ_METNI = `Yaz tatilleri benim için her zaman deniz ile başlar ve deniz ile biter. Sabahın erken saatlerinde deniz kıyısına indiğimde, karşıma çıkan manzara ruhuma huzur verir. Dalgaların sahile vuruşu, deniz kokusunun burnuma dolması ve martıların sesleri bana bambaşka bir dünya sunar. Çocukken deniz kenarında oynadığım oyunlar, kumdan kaleler yaptığım günler hâlâ aklımdadır. Bugün ise deniz benim için hem bir dinlenme alanı hem de ilham kaynağıdır. Çalışmalarım yoğun olduğunda kafamı dağıtmak için deniz kıyısına gitmeyi tercih ederim. Çünkü deniz, sadece su kütlesi değil, aynı zamanda insanı hayata bağlayan bir dost gibidir. Gün içinde farklı saatlerde deniz bambaşka bir görünüme bürünür: sabahları sakin, öğlenleri canlı, akşamları ise turuncu bir tablo gibi. Özellikle gün batımında deniz üzerinde beliren renkler bana hayatın geçiciliğini hatırlatır. Deniz, bana göre özgürlüğün ve sınırsızlığın simgesidir. Ne zaman ufka baksam, deniz bana daha büyük hayaller kurmam gerektiğini söyler. Kısacası, hayatımda deniz hem huzurun hem de yenilenmenin kaynağı olmuştur ve hep öyle kalacaktır.`;
+
+const AGAC_METNI = `Doğanın içinde yürüyüş yaparken en çok dikkatimi çeken şey ağaçların sessizliği ve aynı zamanda verdikleri güçlü varlıktır. Bir ağaç, kökleriyle toprağa tutunurken gövdesiyle gökyüzüne yükselir; bu da bana hayatta dengeyi hatırlatır. Çocukluğumda oyunlarımızın çoğu bir ağaç etrafında geçerdi; ya gölgesinde otururduk ya da dallarına tırmanmaya çalışırdık. Ağaç sadece fiziksel olarak değil, aynı zamanda duygusal anlamda da insana güven verir. Özellikle ders çalışırken pencerenin önünde bir ağaç görmek, zihnimi dinlendirir ve odaklanmamı kolaylaştırır. Ormanda yürürken her ağaç farklı bir hikâye anlatır gibi gelir bana. Kimi yıllardır dimdik ayakta kalmış, kimi yeni filizlenmiş, kimi ise dallarını gökyüzüne doğru uzatarak sanki özgürlüğü temsil etmektedir. Bir ağaç, sadece gölgesiyle değil, sağladığı oksijenle de insan yaşamının vazgeçilmez bir parçasıdır. Ne zaman yorgun hissetsem, bir ağaç altına oturup nefeslenmek bana iyi gelir. Ayrıca, derslerde çevre ve ekoloji konuları işlendiğinde ağaçların ekosistem için ne kadar kritik bir rol üstlendiğini daha net anlıyorum. Her ağaç, hem doğayı hem de insan ruhunu besleyen sessiz bir öğretmen gibidir. Kısacası, ağaç hayatımda hem çocukluk anılarımın hem de bugünkü huzur arayışımın en önemli sembollerinden biridir.`;
+
+const EV_METNI = `Hayatımızın en önemli parçalarından biri hiç şüphesiz evdir. Çünkü ev sadece dört duvar ve bir çatıdan ibaret değildir; aynı zamanda güvenin, huzurun ve aidiyetin sembolüdür. Çocukluğumda yaşadığım ev bana oyun alanı, okul sonrası sığınak ve aile sıcaklığını hissettiren bir yuva olmuştu. O günlerden kalan hatıralarımda ev hep kahkahalar, mis kokular ve aile sohbetleriyle doludur. Üniversiteye başladığımda ilk defa kendi başıma bir ev kiraladım ve bu bana sorumluluk bilincini öğretti. Ev işleri, faturalar ve düzen konusunda yaşadığım deneyimler beni olgunlaştırdı. Aynı zamanda ev, ders çalışırken en verimli ortamımı da oluşturdu. Sessiz bir köşede kitaplarımla zaman geçirmek, bana kütüphane kadar huzurlu bir alan sağladı. Evde geçirilen zaman sadece bireysel değil, sosyal açıdan da önemlidir. Arkadaşlarımı davet ettiğimde ev bir buluşma noktası, dostlukların pekiştiği sıcak bir mekân oldu. Tatillerde ailemin yanına gittiğimde ise ev kavramı tamamen farklı bir anlam kazandı; orası çocukluğun güvenli limanıydı. Kısacası, ev insanın kimliğini şekillendiren, hatıralarını biriktiren ve hayat yolculuğunda ona güç veren en değerli mekândır. Hangi şehirde olursam olayım, nerede yaşarsam yaşayayım, ev benim için her zaman huzurun diğer adıdır.`;
+
+const OKUL_METNI = `İnsan hayatının en belirleyici dönemlerinden biri şüphesiz okul yıllarıdır. İlk kez okula başlayan bir çocuk için bu süreç sadece harfleri ve sayıları öğrenmek değil, aynı zamanda sosyal beceriler kazanmak anlamına gelir. Okul, bireylere düzenli çalışmayı, zaman yönetimini ve disiplinli olmayı öğreten ilk yerdir. Çocukluğumda okula her sabah giderken hissettiğim heyecanı bugün bile hatırlıyorum. Bahçede oynanan oyunlar, teneffüslerde yapılan sohbetler ve öğretmenlerin yönlendirmeleri okulun sadece derslerden ibaret olmadığını gösterirdi. Zaman ilerledikçe okul farklı anlamlar kazandı; ortaokulda arkadaşlık bağları güçlenirken, lisede hedefler daha belirgin hale geldi. Üniversiteye geldiğimde ise okul kavramı tamamen değişti, artık özgür düşünceyi geliştiren, araştırmayı teşvik eden ve mesleki beceriler kazandıran bir alan oldu. Okulda geçen her dönem, kişiliğimi şekillendiren bir adım gibiydi. Aynı zamanda okul bana hataların da değerini öğretti; çünkü başarısızlıklar bile deneyim kazanmanın bir parçasıydı. Kütüphaneler, laboratuvarlar, spor salonları ve etkinlik alanları sayesinde okul bir yaşam merkezi haline geldi. Öğretmenlerim bana okulun yalnızca sınavlara hazırlık için değil, hayatın kendisi için var olduğunu sık sık hatırlatırdı. Bu nedenle okul, bana göre hem bilgi hem de karakter kazandıran en önemli kurumdur. Mezun olduktan yıllar sonra bile okul anılarının unutulmamasının sebebi de budur. Birçok dostluk, bir ömür boyu sürecek hatıralar ve değerli kazanımlar okul sayesinde hayatımıza girer. Sonuçta, okul insanın hem zihinsel hem de sosyal gelişimini destekleyen, toplumun temellerini güçlendiren vazgeçilmez bir yerdir.`;
+
+const MUZIK_METNI = `Hayatımda ilham aldığım en değerli unsurlardan biri müzik olmuştur. Sabahları uyandığımda bazen sessizliği tercih ederim, bazen de hafif bir melodi güne başlamamı kolaylaştırır. Ders çalışırken sakin bir ortamda olmak, odaklanmamı güçlendirir; bazen fonda çalan bir parça düşüncelerimi düzenlememe yardımcı olur. Arkadaşlarla vakit geçirirken enerjik melodiler ortamı neşelendirir ve sohbetleri daha keyifli hâle getirir. İnsanlık tarihi boyunca farklı kültürlerde sesler, ritimler ve melodiler önemli bir rol oynamıştır. Düğünlerde çalınan ritimler, toplumsal bağları güçlendirirken, konserlerde duyulan ezgiler ortak bir coşkuyu paylaşmamıza yardımcı olur. Müzik sadece eğlence aracı değil, aynı zamanda bir terapi yöntemi olarak da değer taşır. Yorgun olduğumda veya stresliyken sevdiğim parçaları dinlemek ruhumu rahatlatır ve enerji verir. Spor yaparken hızlı tempolu melodiler hareketlerimi ritmik hâle getirir ve performansımı artırır. Çocukluk anılarımda şarkılar ve küçük performanslar hâlâ hafızamda canlıdır. Bazen yazı yazarken veya proje geliştirirken fonda çalan hafif bir melodi yeni fikirlerin aklıma gelmesine yardımcı olur. Kısacası, müzik hayatın farklı alanlarında kendini hissettiren, duyguları ifade etmenin ve paylaşmanın en güzel yollarından biridir. Müzik olmadan bir dünya, sessiz ve renksiz olurdu; bu yüzden hayatımızda her zaman özel bir yere sahiptir.`;
+
 const ALISTIRMALAR = [
   {
     id: "mevsim",
@@ -58,6 +70,48 @@ const ALISTIRMALAR = [
     arananKelime: "sevgi",
     renk: "from-rose-400 to-pink-600",
   },
+  {
+    id: "kitap",
+    baslik: "Kitap Kelimesi",
+    metin: KITAP_METNI,
+    arananKelime: "kitap",
+    renk: "from-emerald-400 to-teal-500",
+  },
+  {
+    id: "deniz",
+    baslik: "Deniz Kelimesi",
+    metin: DENIZ_METNI,
+    arananKelime: "deniz",
+    renk: "from-cyan-400 to-blue-500",
+  },
+  {
+    id: "agac",
+    baslik: "Ağaç Kelimesi",
+    metin: AGAC_METNI,
+    arananKelime: "ağaç",
+    renk: "from-lime-400 to-green-500",
+  },
+  {
+    id: "ev",
+    baslik: "Ev Kelimesi",
+    metin: EV_METNI,
+    arananKelime: "ev",
+    renk: "from-orange-400 to-red-500",
+  },
+  {
+    id: "okul",
+    baslik: "Okul Kelimesi",
+    metin: OKUL_METNI,
+    arananKelime: "okul",
+    renk: "from-violet-400 to-purple-600",
+  },
+  {
+    id: "muzik",
+    baslik: "Müzik Kelimesi",
+    metin: MUZIK_METNI,
+    arananKelime: "müzik",
+    renk: "from-sky-400 to-indigo-500",
+  },
 ];
 
 const ARANAN_KELIME = "mevsim";
@@ -78,6 +132,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
 
   const intervalRef = useRef(null);
   const textRef = useRef(null);
+  const timeUpAudioRef = useRef(null);
 
   // Eğer görünür liste sınırlandıysa, seçimin geçerli kalmasını sağla
   useEffect(() => {
@@ -98,6 +153,22 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
           if (prev <= 1) {
             setIsTimerRunning(false);
             setShowResults(true);
+            // Süre bitiminde anahtar kelimeleri vurgula
+            const highlighted = currentExercise.metin.replace(
+              new RegExp(currentExercise.arananKelime, "gi"),
+              (match) =>
+                `<mark class="bg-yellow-300 px-1 rounded">${match}</mark>`
+            );
+            setHighlightedText(highlighted);
+            // Süre dolduğunda uyarı sesi çal
+            if (timeUpAudioRef.current) {
+              try {
+                timeUpAudioRef.current.currentTime = 0;
+                timeUpAudioRef.current.play();
+              } catch (e) {
+                // Sessizce geç
+              }
+            }
             return 0;
           }
           return prev - 1;
@@ -110,7 +181,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isTimerRunning, timeLeft]);
+  }, [isTimerRunning, timeLeft, currentExercise]);
 
   // Alıştırmayı başlat
   const startExercise = () => {
@@ -181,6 +252,12 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
   if (!isStarted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+        <audio
+          ref={timeUpAudioRef}
+          src="/sesler/doldu.mp3"
+          preload="auto"
+          hidden
+        />
         {/* Geri Dön Butonu - Sol Üst */}
         <div className="absolute top-4 left-4 z-10">
           <button
@@ -243,7 +320,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
                       <span className="font-semibold">{exercise.baslik}</span>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      "{exercise.arananKelime}" kelimesini bulun
+                      &quot;{exercise.arananKelime}&quot; kelimesini bulun
                     </p>
                   </div>
                 </button>
@@ -254,7 +331,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
               <div className="inline-flex items-center gap-3 bg-blue-100 text-blue-800 px-6 py-3 rounded-full mb-4">
                 <Target className="w-6 h-6" />
                 <span className="font-semibold text-lg">
-                  Aranan Kelime: "{currentExercise.arananKelime}"
+                  Aranan Kelime: &quot;{currentExercise.arananKelime}&quot;
                 </span>
               </div>
               <div className="inline-flex items-center gap-3 bg-orange-100 text-orange-800 px-6 py-3 rounded-full">
@@ -271,8 +348,8 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
               </h3>
               <ul className="text-gray-600 space-y-2">
                 <li>
-                  • Metni okumadan sadece "{currentExercise.arananKelime}"
-                  kelimesine odaklanın
+                  • Metni okumadan sadece &quot;{currentExercise.arananKelime}
+                  &quot; kelimesine odaklanın
                 </li>
                 <li>• Kelimenin kaç kez geçtiğini sayın</li>
                 <li>• 30 saniye süreniz var</li>
@@ -297,6 +374,12 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button
@@ -328,7 +411,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
           <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full">
             <Target className="w-5 h-5" />
             <span className="font-semibold">
-              "{currentExercise.arananKelime}" kelimesini bulun
+              &quot;{currentExercise.arananKelime}&quot; kelimesini bulun
             </span>
           </div>
         </div>
@@ -363,7 +446,7 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
               <span
                 className={`bg-gradient-to-r ${currentExercise.renk} text-white px-3 py-1 rounded-full font-bold text-lg shadow-lg animate-pulse`}
               >
-                "{currentExercise.arananKelime}"
+                &quot;{currentExercise.arananKelime}&quot;
               </span>{" "}
               kelimesine odaklanın ve kaç kez geçtiğini sayın
             </div>
@@ -383,7 +466,8 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
           <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
             <div className="text-center">
               <label className="block text-lg font-semibold text-gray-700 mb-3">
-                "{currentExercise.arananKelime}" kelimesi kaç kez geçiyor?
+                &quot;{currentExercise.arananKelime}&quot; kelimesi kaç kez
+                geçiyor?
               </label>
               <div className="flex items-center justify-center gap-4">
                 <input
@@ -467,8 +551,9 @@ export default function BulmaPage({ visibleIds = null, defaultId = "mevsim" }) {
             {/* Vurgulanmış Metin */}
             <div className="mb-6">
               <h4 className="text-lg font-semibold text-gray-700 mb-3">
-                <Eye className="w-5 h-5 inline mr-2" />"
-                {currentExercise.arananKelime}" kelimesinin geçtiği yerler:
+                <Eye className="w-5 h-5 inline mr-2" />
+                &quot;{currentExercise.arananKelime}&quot; kelimesinin geçtiği
+                yerler:
               </h4>
               <div
                 className="bg-gray-50 rounded-lg p-6 text-gray-800 leading-relaxed text-lg border-2 border-gray-200"

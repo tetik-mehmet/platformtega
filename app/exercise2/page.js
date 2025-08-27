@@ -246,6 +246,73 @@ export default function Exercise2() {
       }
     };
 
+    // Deniz arka planı (gradient, dalga çizgileri ve kabarcıklar)
+    const drawSeaBackground = (ctx, canvas, t) => {
+      // Arka plan gradyanı
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "#0ea5e9"); // cyan-500
+      gradient.addColorStop(0.5, "#0284c7"); // sky-600
+      gradient.addColorStop(1, "#0c4a6e"); // slate-900 mavi ton
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Işık huzmeleri (çok hafif)
+      ctx.save();
+      ctx.globalAlpha = 0.06;
+      ctx.fillStyle = "#ffffff";
+      for (let i = 0; i < 3; i++) {
+        const baseX = (i * canvas.width) / 3 + ((t * 20) % (canvas.width / 3));
+        ctx.beginPath();
+        ctx.moveTo(baseX - 60, 0);
+        ctx.lineTo(baseX + 20, 0);
+        ctx.lineTo(baseX + 120, canvas.height);
+        ctx.lineTo(baseX - 100, canvas.height);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // Yüzey dalgaları (sine çizgileri)
+      ctx.save();
+      ctx.globalAlpha = 0.2;
+      ctx.strokeStyle = "#e0f2fe"; // açık mavi
+      for (let j = 0; j < 4; j++) {
+        const y = 30 + j * 18;
+        ctx.beginPath();
+        for (let x = 0; x <= canvas.width; x += 6) {
+          const wave = Math.sin((x + t * 120 + j * 80) * 0.02) * 3;
+          ctx.lineTo(x, y + wave);
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Kabarcıklar
+      ctx.save();
+      ctx.fillStyle = "#e0f2fe";
+      ctx.globalAlpha = 0.35;
+      const bubbleCount = 18;
+      for (let k = 0; k < bubbleCount; k++) {
+        const seed = k * 97.123;
+        const x = ((seed * 53.7) % canvas.width) + Math.sin(t * 0.8 + k) * 8;
+        const speedY = 20 + (seed % 20); // 20-40 arası
+        let y = canvas.height - ((t * speedY + seed) % (canvas.height + 40));
+        const r = 2 + (seed % 5) * 0.7;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        // kabarcık parlak kenar
+        ctx.beginPath();
+        ctx.globalAlpha = 0.25;
+        ctx.fillStyle = "#ffffff";
+        ctx.arc(x - r * 0.4, y - r * 0.4, r * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 0.35;
+        ctx.fillStyle = "#e0f2fe";
+      }
+      ctx.restore();
+    };
+
     const drawSquare = (ctx, centerX, centerY, radius, t) => {
       // Kare çevresi için 8 aşamalı hareket
       const cycle = t % (2 * Math.PI);
@@ -359,19 +426,31 @@ export default function Exercise2() {
             drawFigure8Path(ctx, centerX, centerY, radius);
       }
 
-      // Canvas'ı temizle
+      // Canvas'ı temizle ve deniz arka planını çiz
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSeaBackground(ctx, canvas, t);
 
-      // Arka plan
-      ctx.fillStyle = "#F8FAFF";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Rota izini çiz
+      // Rota izini çiz (daha belirgin)
       const colors = fishColors[fishColor];
-      ctx.strokeStyle = `${colors.body}26`; // %15 opaklık
-      ctx.lineWidth = 2;
+      // Alt katman: kalın ve yumuşak ışıltı
+      ctx.save();
+      ctx.strokeStyle = colors.body;
+      ctx.lineWidth = 6;
+      ctx.globalAlpha = 0.35;
+      ctx.shadowColor = colors.body;
+      ctx.shadowBlur = 10;
       drawPathFunction();
       ctx.stroke();
+      ctx.restore();
+
+      // Üst katman: ince ve daha opak çizgi
+      ctx.save();
+      ctx.strokeStyle = colors.body;
+      ctx.lineWidth = 3;
+      ctx.globalAlpha = 0.85;
+      drawPathFunction();
+      ctx.stroke();
+      ctx.restore();
 
       // Balığı çiz
       drawFish(fishPosition.x, fishPosition.y, fishPosition.angle);

@@ -5918,6 +5918,29 @@ export default function IngilizcePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
+        {/* Geri Dön Butonu */}
+        <div className="mb-6">
+          <button
+            onClick={() => (window.location.href = "/genel")}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Genel Sayfaya Dön
+          </button>
+        </div>
+
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           İngilizce Öğrenme Merkezi
         </h1>

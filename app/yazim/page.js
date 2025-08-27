@@ -1,15 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 export default function YazimPage({ visibleSets = null }) {
   const router = useRouter();
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(40);
   const [isActive, setIsActive] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
   const [currentSet, setCurrentSet] = useState(1);
+  const [activeQuestions, setActiveQuestions] = useState([]);
+  const audioRef = useRef(null);
+  const timeUpAudioRef = useRef(null);
 
   const questionsSet1 = [
     {
@@ -389,24 +392,228 @@ export default function YazimPage({ visibleSets = null }) {
     },
   ];
 
-  const questions =
-    currentSet === 1
-      ? questionsSet1
-      : currentSet === 2
-      ? questionsSet2
-      : currentSet === 3
-      ? questionsSet3
-      : currentSet === 4
-      ? questionsSet4
-      : currentSet === 5
-      ? questionsSet5
-      : questionsSet6;
+  const questionsSet7 = [
+    {
+      id: 1,
+      words: ["mimar", "mimarh", "mımar"],
+      correct: 0,
+    },
+    {
+      id: 2,
+      words: ["muzze", "müze", "müzze"],
+      correct: 1,
+    },
+    {
+      id: 3,
+      words: ["terapi", "terepi", "terapı"],
+      correct: 0,
+    },
+    {
+      id: 4,
+      words: ["atlas", "atllas", "atles"],
+      correct: 0,
+    },
+    {
+      id: 5,
+      words: ["sekreter", "sekretör", "segreter"],
+      correct: 0,
+    },
+    {
+      id: 6,
+      words: ["tekneloji", "teknoloji", "teknooji"],
+      correct: 1,
+    },
+    {
+      id: 7,
+      words: ["antoloji", "antaloji", "antoloci"],
+      correct: 0,
+    },
+    {
+      id: 8,
+      words: ["kampanya", "kampanyae", "kamponya"],
+      correct: 0,
+    },
+    {
+      id: 9,
+      words: ["stajyer", "stajiar", "stajyir"],
+      correct: 0,
+    },
+    {
+      id: 10,
+      words: ["lavabo", "lavapo", "lavobo"],
+      correct: 0,
+    },
+  ];
+
+  const questionsSet8 = [
+    {
+      id: 1,
+      words: ["karbonhidrat", "karbohidrat", "karbonhidraat"],
+      correct: 0,
+    },
+    {
+      id: 2,
+      words: ["akvaryum", "akveriyum", "akvaryom"],
+      correct: 0,
+    },
+    {
+      id: 3,
+      words: ["diyafram", "diyafran", "diyafrem"],
+      correct: 0,
+    },
+    {
+      id: 4,
+      words: ["kütüphane", "kütüphana", "kütüpane"],
+      correct: 0,
+    },
+    {
+      id: 5,
+      words: ["heykeltıraş", "heykeltaş", "heykeltraş"],
+      correct: 0,
+    },
+    {
+      id: 6,
+      words: ["istatistik", "istatislik", "istatistlik"],
+      correct: 0,
+    },
+    {
+      id: 7,
+      words: ["ekspres", "ekspreas", "eksperez"],
+      correct: 0,
+    },
+    {
+      id: 8,
+      words: ["lisans", "lisanz", "lisens"],
+      correct: 0,
+    },
+    {
+      id: 9,
+      words: ["molekül", "molekül", "molekül"],
+      correct: 0,
+    },
+  ];
+
+  const questionsSet9 = [
+    {
+      id: 1,
+      words: ["macera", "macarra", "maccera"],
+      correct: 0,
+    },
+    {
+      id: 2,
+      words: ["bisiklet", "bissiklet", "bisikled"],
+      correct: 0,
+    },
+    {
+      id: 3,
+      words: ["oyuncak", "oyuncag", "oyıncak"],
+      correct: 0,
+    },
+    {
+      id: 4,
+      words: ["gökyüzü", "gokyüzü", "gökyüzu"],
+      correct: 0,
+    },
+    {
+      id: 5,
+      words: ["bahçe", "bahce", "baheçe"],
+      correct: 0,
+    },
+    {
+      id: 6,
+      words: ["resim", "ressim", "rezim"],
+      correct: 0,
+    },
+    {
+      id: 7,
+      words: ["yarışma", "yarişma", "yarışmaa"],
+      correct: 0,
+    },
+    {
+      id: 8,
+      words: ["arkadaş", "arkadas", "arkdaş"],
+      correct: 0,
+    },
+    {
+      id: 9,
+      words: ["ödev", "ödevv", "odev"],
+      correct: 0,
+    },
+  ];
+
+  const questionsSet10 = [
+    {
+      id: 1,
+      words: ["sosyalleşmek", "sosyalileşmek", "sosyallesmek"],
+      correct: 0,
+    },
+    {
+      id: 2,
+      words: ["bağımsızlık", "bagımsızlık", "bağımsızlıkh"],
+      correct: 0,
+    },
+    {
+      id: 3,
+      words: ["mükemmellik", "mükemellik", "mukemmellik"],
+      correct: 0,
+    },
+    {
+      id: 4,
+      words: ["entegrasyon", "entegresyon", "entegreasyon"],
+      correct: 0,
+    },
+    {
+      id: 5,
+      words: ["optimizasyon", "optimizayson", "optimizasiyon"],
+      correct: 0,
+    },
+    {
+      id: 6,
+      words: ["potansiyel", "potansyel", "potansiyal"],
+      correct: 0,
+    },
+    {
+      id: 7,
+      words: ["stratejik", "stratajık", "stratejık"],
+      correct: 0,
+    },
+    {
+      id: 8,
+      words: ["revizyon", "reviziyon", "revizsyon"],
+      correct: 0,
+    },
+    {
+      id: 9,
+      words: ["uyumluluk", "uygunluk", "uyumlluk"],
+      correct: 0,
+    },
+  ];
+
+  const getSetByNumber = (setNumber) => {
+    if (setNumber === 1) return questionsSet1;
+    if (setNumber === 2) return questionsSet2;
+    if (setNumber === 3) return questionsSet3;
+    if (setNumber === 4) return questionsSet4;
+    if (setNumber === 5) return questionsSet5;
+    if (setNumber === 6) return questionsSet6;
+    if (setNumber === 7) return questionsSet7;
+    if (setNumber === 8) return questionsSet8;
+    if (setNumber === 9) return questionsSet9;
+    return questionsSet10;
+  };
 
   useEffect(() => {
     if (isActive && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
+      // Süre dolduğunda uyarı sesi çal
+      if (timeUpAudioRef.current) {
+        try {
+          timeUpAudioRef.current.currentTime = 0;
+          timeUpAudioRef.current.play();
+        } catch (e) {}
+      }
       finishExercise();
     }
   }, [isActive, timeLeft]);
@@ -417,10 +624,24 @@ export default function YazimPage({ visibleSets = null }) {
     }
     setCurrentSet(setNumber);
     setIsActive(true);
-    setTimeLeft(20);
+    setTimeLeft(40);
     setSelectedAnswers({});
     setShowResults(false);
     setScore(0);
+
+    const sourceQuestions = getSetByNumber(setNumber);
+    const shuffled = sourceQuestions.map((q) => {
+      const indices = [0, 1, 2];
+      // Fisher-Yates
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
+      const newWords = indices.map((idx) => q.words[idx]);
+      const newCorrect = indices.indexOf(q.correct);
+      return { ...q, words: newWords, correct: newCorrect };
+    });
+    setActiveQuestions(shuffled);
   };
 
   const selectAnswer = (questionId, answerIndex) => {
@@ -433,13 +654,21 @@ export default function YazimPage({ visibleSets = null }) {
   const finishExercise = () => {
     setIsActive(false);
     let correctCount = 0;
-    questions.forEach((question) => {
+    activeQuestions.forEach((question) => {
       if (selectedAnswers[question.id] === question.correct) {
         correctCount++;
       }
     });
     setScore(correctCount);
     setShowResults(true);
+
+    // Mevcut set için tüm sorular doğru cevaplandıysa başarı sesi çal
+    const currentSetQuestions = getSetByNumber(currentSet);
+    if (correctCount === currentSetQuestions.length && audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.log("Ses çalınamadı:", error);
+      });
+    }
   };
 
   const formatTime = (seconds) => {
@@ -449,7 +678,7 @@ export default function YazimPage({ visibleSets = null }) {
   };
 
   const allQuestionsAnswered = () => {
-    return questions.every((question) =>
+    return activeQuestions.every((question) =>
       selectedAnswers.hasOwnProperty(question.id)
     );
   };
@@ -459,7 +688,7 @@ export default function YazimPage({ visibleSets = null }) {
     setShowResults(false);
     setSelectedAnswers({});
     setScore(0);
-    setTimeLeft(20);
+    setTimeLeft(40);
   };
 
   const goBackToOzel = () => {
@@ -470,6 +699,12 @@ export default function YazimPage({ visibleSets = null }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
+          <audio
+            ref={timeUpAudioRef}
+            src="/sesler/doldu.mp3"
+            preload="auto"
+            hidden
+          />
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
               Yazım Etkinliği Sonuçları - Set {currentSet}
@@ -477,15 +712,16 @@ export default function YazimPage({ visibleSets = null }) {
 
             <div className="text-center mb-8">
               <div className="text-6xl font-bold text-blue-600 mb-2">
-                {score}/{questions.length}
+                {score}/{activeQuestions.length}
               </div>
               <div className="text-xl text-gray-600">
-                Doğru Cevap: {Math.round((score / questions.length) * 100)}%
+                Doğru Cevap:{" "}
+                {Math.round((score / activeQuestions.length) * 100)}%
               </div>
             </div>
 
             <div className="grid gap-4">
-              {questions.map((question, index) => {
+              {activeQuestions.map((question, index) => {
                 const userAnswer = selectedAnswers[question.id];
                 const isCorrect = userAnswer === question.correct;
 
@@ -573,7 +809,15 @@ export default function YazimPage({ visibleSets = null }) {
                     ? "bg-orange-600 hover:bg-orange-700 text-white"
                     : currentSet === 5
                     ? "bg-pink-600 hover:bg-pink-700 text-white"
-                    : "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    : currentSet === 6
+                    ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    : currentSet === 7
+                    ? "bg-teal-600 hover:bg-teal-700 text-white"
+                    : currentSet === 8
+                    ? "bg-amber-600 hover:bg-amber-700 text-white"
+                    : currentSet === 9
+                    ? "bg-lime-600 hover:bg-lime-700 text-white"
+                    : "bg-rose-600 hover:bg-rose-700 text-white"
                 }`}
               >
                 Tekrar Dene
@@ -589,6 +833,12 @@ export default function YazimPage({ visibleSets = null }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl w-full text-center">
+          <audio
+            ref={timeUpAudioRef}
+            src="/sesler/doldu.mp3"
+            preload="auto"
+            hidden
+          />
           {/* Geri Dön Butonu */}
           <div className="text-left mb-6">
             <button
@@ -620,7 +870,7 @@ export default function YazimPage({ visibleSets = null }) {
             <p className="mb-4">
               Her satırda doğru yazılan kelimenin altını çiziniz.
             </p>
-            <p className="text-sm mb-6">Her set için süre: 20 saniye</p>
+            <p className="text-sm mb-6">Her set için süre: 40 saniye</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
@@ -719,6 +969,66 @@ export default function YazimPage({ visibleSets = null }) {
                 </button>
               </div>
             )}
+
+            {(!visibleSets || visibleSets.includes(7)) && (
+              <div className="border-2 border-teal-200 rounded-xl p-4 hover:border-teal-400 transition-colors">
+                <h3 className="text-lg font-semibold text-teal-800 mb-2">7</h3>
+                <p className="text-gray-600 mb-3 text-sm">
+                  {questionsSet7.length} soru
+                </p>
+                <button
+                  onClick={() => startExercise(7)}
+                  className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full text-sm"
+                >
+                  Başla
+                </button>
+              </div>
+            )}
+
+            {(!visibleSets || visibleSets.includes(8)) && (
+              <div className="border-2 border-amber-200 rounded-xl p-4 hover:border-amber-400 transition-colors">
+                <h3 className="text-lg font-semibold text-amber-800 mb-2">8</h3>
+                <p className="text-gray-600 mb-3 text-sm">
+                  {questionsSet8.length} soru
+                </p>
+                <button
+                  onClick={() => startExercise(8)}
+                  className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full text-sm"
+                >
+                  Başla
+                </button>
+              </div>
+            )}
+
+            {(!visibleSets || visibleSets.includes(9)) && (
+              <div className="border-2 border-lime-200 rounded-xl p-4 hover:border-lime-400 transition-colors">
+                <h3 className="text-lg font-semibold text-lime-800 mb-2">9</h3>
+                <p className="text-gray-600 mb-3 text-sm">
+                  {questionsSet9.length} soru
+                </p>
+                <button
+                  onClick={() => startExercise(9)}
+                  className="bg-lime-600 hover:bg-lime-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full text-sm"
+                >
+                  Başla
+                </button>
+              </div>
+            )}
+
+            {(!visibleSets || visibleSets.includes(10)) && (
+              <div className="border-2 border-rose-200 rounded-xl p-4 hover:border-rose-400 transition-colors">
+                <h3 className="text-lg font-semibold text-rose-800 mb-2">10</h3>
+                <p className="text-gray-600 mb-3 text-sm">
+                  {questionsSet10.length} soru
+                </p>
+                <button
+                  onClick={() => startExercise(10)}
+                  className="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full text-sm"
+                >
+                  Başla
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -727,6 +1037,15 @@ export default function YazimPage({ visibleSets = null }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      {/* Ses dosyası için gizli audio elementi */}
+      <audio ref={audioRef} src="/success.mp3" preload="auto" />
+      <audio
+        ref={timeUpAudioRef}
+        src="/sesler/doldu.mp3"
+        preload="auto"
+        hidden
+      />
+
       {/* Geri Dön Butonu - Sol Üst */}
       <div className="absolute top-4 left-4 z-10">
         <button
@@ -766,13 +1085,16 @@ export default function YazimPage({ visibleSets = null }) {
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="text-gray-600">Toplam {questions.length} soru</div>
+            <div className="text-gray-600">
+              Toplam {activeQuestions.length} soru
+            </div>
             <div className="w-64 bg-gray-200 rounded-full h-2">
               <div
                 className="bg-blue-600 h-2 rounded-full transition-all duration-1000"
                 style={{
                   width: `${
-                    (Object.keys(selectedAnswers).length / questions.length) *
+                    (Object.keys(selectedAnswers).length /
+                      activeQuestions.length) *
                     100
                   }%`,
                 }}
@@ -790,7 +1112,7 @@ export default function YazimPage({ visibleSets = null }) {
           </div>
 
           <div className="space-y-6">
-            {questions.map((question, index) => (
+            {activeQuestions.map((question, index) => (
               <div
                 key={question.id}
                 className="border-b border-gray-200 pb-6 last:border-b-0"
